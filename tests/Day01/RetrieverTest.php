@@ -46,4 +46,15 @@ class RetrieverTest extends TestCase
 
         $this->assertEquals(12, $distance);
     }
+
+    public function testFirstRepeatedPosition()
+    {
+        $this->retriever->move("R", 8);
+        $this->retriever->move("R", 4);
+        $this->retriever->move("R", 4);
+        $this->retriever->move("R", 8);
+
+        $firstRepeatedDistance = $this->retriever->getFirstRepeatedDistance();
+        $this->assertEquals(4, $firstRepeatedDistance);
+    }
 }

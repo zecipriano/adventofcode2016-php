@@ -41,6 +41,9 @@ class Day01Command extends Command
         }
 
         $blocks = $retriever->getDistance();
+        $firstTwice = $retriever->getFirstRepeatedDistance();
+
         $output->writeln("<info>The Easter Bunny HQ is $blocks blocks away</info>");
+        $output->writeln("<info>The first location visited twice is $firstTwice blocks away</info>");
     }
 }
