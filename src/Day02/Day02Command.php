@@ -3,6 +3,7 @@
 namespace AdventOfCode2016\Day02;
 
 use AdventOfCode2016\Day02\Keypad;
+use AdventOfCode2016\Day02\AlternativeKeypad;
 use AdventOfCode2016\Utils\FileReader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -33,18 +34,23 @@ class Day02Command extends Command
         $lines = $file->getArrayOfLines();
 
         $keypad = new Keypad();
+        $altKeypad = new AlternativeKeypad();
         $code = "";
+        $altCode = "";
 
         foreach ($lines as $line) {
             $chars = str_split($line);
 
             foreach ($chars as $char) {
                 $keypad->move($char);
+                $altKeypad->move($char);
             }
 
             $code = $code . $keypad->getCurrentButton();
+            $altCode = $altCode . $altKeypad->getCurrentButton();
         }
 
         $output->writeln("<info>The bathroom code is $code.</info>");
+        $output->writeln("<info>The alternative bathroom code is $altCode.</info>");
     }
 }
