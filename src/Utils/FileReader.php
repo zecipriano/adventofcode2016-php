@@ -27,4 +27,15 @@ class FileReader
         $string = trim(file_get_contents($this->filename));
         return $string;
     }
+
+    /**
+     * Get the content as an array of strings. Each string is a line.
+     *
+     * @return array An array of lines.
+     */
+    public function getArrayOfLines() : array
+    {
+        $array = file($this->filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        return $array;
+    }
 }
