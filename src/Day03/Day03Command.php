@@ -34,17 +34,35 @@ class Day03Command extends Command
 
         $validator = new TriangleValidator();
         $validTriangles = 0;
+        $columnTriangles = [[], [], []];
+        $validColumnTriangles = 0;
 
         foreach ($lines as $triangleSides) {
             $side1 = intval(strtok($triangleSides, " "));
+            array_push($columnTriangles[0], $side1);
+
             $side2 = intval(strtok(" "));
+            array_push($columnTriangles[1], $side2);
+
             $side3 = intval(strtok(" "));
+            array_push($columnTriangles[2], $side3);
 
             if ($validator->validate($side1, $side2, $side3)) {
                 $validTriangles++;
             }
+
+            if (count($columnTriangles[0]) === 3) {
+                foreach ($columnTriangles as $columnTriangle) {
+                    if ($validator->validate($columnTriangle[0], $columnTriangle[1], $columnTriangle[2])) {
+                        $validColumnTriangles++;
+                    }
+                }
+
+                $columnTriangles = [[], [], []];
+            }
         }
 
         $output->writeln("<info>There are $validTriangles valid triangles.</info>");
+        $output->writeln("<info>If defined in columns, there are $validColumnTriangles valid triangles.</info>");
     }
 }
