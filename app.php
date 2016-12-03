@@ -6,11 +6,13 @@ use Symfony\Component\Console\Application;
 
 use AdventOfCode2016\Day01\Day01Command;
 use AdventOfCode2016\Day02\Day02Command;
+use AdventOfCode2016\Day03\Day03Command;
 
 $application = new Application();
 
 // Commands
 $application->add(new Day01Command());
 $application->add(new Day02Command());
+$application->add(new Day03Command());
 
 $application->run();
