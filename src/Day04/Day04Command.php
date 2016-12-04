@@ -4,6 +4,7 @@ namespace AdventOfCode2016\Day04;
 
 use AdventOfCode2016\Utils\FileReader;
 use AdventOfCode2016\Day04\Room;
+use AdventOfCode2016\Day04\Decryptor;
 use AdventOfCode2016\Day04\RoomStringParser;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -34,6 +35,7 @@ class Day04Command extends Command
         $lines = $file->getArrayOfLines();
         $parser = new RoomStringParser();
         $room = new Room();
+        $decryptor = new Decryptor();
         $sum = 0;
 
         foreach ($lines as $line) {
@@ -41,6 +43,12 @@ class Day04Command extends Command
 
             if ($room->valCheckSum($parsedLine['name'], $parsedLine['checksum'])) {
                 $sum += $parsedLine['id'];
+
+                $decryptedString = $decryptor->decrypt($parsedLine['name'], $parsedLine['id']);
+
+                if (strpos($decryptedString, "object")) {
+                    $output->writeln("<info>" . $decryptedString . " [" . $parsedLine['id'] . "].</info>");
+                }
             }
         }
 
