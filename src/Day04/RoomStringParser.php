@@ -4,6 +4,13 @@ namespace AdventOfCode2016\Day04;
 
 class RoomStringParser
 {
+    /**
+     * Extract the different values from the input string.
+     *
+     * @param  string $roomString The input string
+     *
+     * @return array              An associative array with the extracted values
+     */
     public function parse(string $roomString) : array
     {
         $parsedString = [];
