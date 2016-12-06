@@ -35,7 +35,9 @@ class Day06Command extends Command
         $corrector = new MessageCorrector();
 
         $correctedMessage = $corrector->correct($lines);
+        $correctedMessageLeastCommon = $corrector->correctLeastCommon($lines);
 
         $output->writeln("<info>The corrected message is $correctedMessage</info>");
+        $output->writeln("<info>The corrected message (with the least common char method) is $correctedMessageLeastCommon</info>");
     }
 }

@@ -7,9 +7,13 @@ use AdventOfCode2016\Day06\MessageCorrector;
 
 class MessageCorrectorTest extends TestCase
 {
-    public function testItCorrectsTheMessage()
+    protected $corrector;
+    protected $messagesArray;
+
+    protected function setUp()
     {
-        $messagesArray = [
+        $this->corrector = new MessageCorrector();
+        $this->messagesArray = [
             'eedadn',
             'drvtee',
             'eandsr',
@@ -27,10 +31,17 @@ class MessageCorrectorTest extends TestCase
             'dvrsen',
             'enarar'
         ];
+    }
 
-        $messageCorrector = new MessageCorrector();
-        $correctedMessage = $messageCorrector->correct($messagesArray);
-
+    public function testItCorrectsTheMessage()
+    {
+        $correctedMessage = $this->corrector->correct($this->messagesArray);
         $this->assertEquals('easter', $correctedMessage);
+    }
+
+    public function testItCorrectsTheMessageLeastCommon()
+    {
+        $correctedMessage = $this->corrector->correctLeastCommon($this->messagesArray);
+        $this->assertEquals('advent', $correctedMessage);
     }
 }
