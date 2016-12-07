@@ -35,13 +35,19 @@ class Day07Command extends Command
 
         $checker = new IPChecker();
         $countTLSSupport = 0;
+        $countSSLSupport = 0;
 
         foreach ($lines as $address) {
             if ($checker->checkTLS($address)) {
                 $countTLSSupport++;
             }
+
+            if ($checker->checkSSL($address)) {
+                $countSSLSupport++;
+            }
         }
 
         $output->writeln("<info>$countTLSSupport addresses suport TLS.</info>");
+        $output->writeln("<info>$countSSLSupport addresses suport SSL.</info>");
     }
 }
