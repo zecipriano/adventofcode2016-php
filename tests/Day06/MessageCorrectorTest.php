@@ -35,13 +35,13 @@ class MessageCorrectorTest extends TestCase
 
     public function testItCorrectsTheMessage()
     {
-        $correctedMessage = $this->corrector->correct($this->messagesArray);
+        $correctedMessage = $this->corrector->correctMC($this->messagesArray);
         $this->assertEquals('easter', $correctedMessage);
     }
 
     public function testItCorrectsTheMessageLeastCommon()
     {
-        $correctedMessage = $this->corrector->correctLeastCommon($this->messagesArray);
+        $correctedMessage = $this->corrector->correctLC($this->messagesArray);
         $this->assertEquals('advent', $correctedMessage);
     }
 }
