@@ -14,6 +14,7 @@ class Day05Command extends Command
     {
         $this
             ->setName('day05')
+            ->setDescription('Day 05: How About a Nice Game of Chess?')
             ->addArgument('doorID', InputArgument::REQUIRED, 'The door ID.');
     }
 
@@ -22,11 +23,15 @@ class Day05Command extends Command
         $doorID = $input->getArgument('doorID');
 
         $generator = new PasswordGenerator();
+        $passwords = $generator->generate($doorID);
 
-        $password = $generator->generate($doorID);
-        $improvedPassword = $generator->generateImprovedPassword($doorID);
+        $output->writeln(
+            "<info>The password is " . $passwords['password'] . ".</info>"
+        );
 
-        $output->writeln("<info>The password is $password.</info>");
-        $output->writeln("<info>The improved password is $improvedPassword.</info>");
+        $output->writeln(
+            "<info>The improved password is " . $passwords['improvedPassword'] .
+            ".</info>"
+        );
     }
 }

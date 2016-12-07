@@ -16,13 +16,8 @@ class PasswordGeneratorTest extends TestCase
 
     public function testItGeneratesThePassword()
     {
-        $password = $this->generator->generate('abc');
-        $this->assertEquals('18f47a30', $password);
-    }
-
-    public function testItGeneratesTheBetterPassword()
-    {
-        $password = $this->generator->generateImprovedPassword('abc');
-        $this->assertEquals('05ace8e3', $password);
+        $passwords = $this->generator->generate('abc');
+        $this->assertEquals('18f47a30', $passwords['password']);
+        $this->assertEquals('05ace8e3', $passwords['improvedPassword']);
     }
 }
