@@ -9,6 +9,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 class Day08Command extends Command
 {
@@ -54,6 +55,26 @@ class Day08Command extends Command
         }
 
         $litPixels = $display->litPixels();
+        $displayPixels = $display->getDisplay();
+
+        $lit = new OutputFormatterStyle('green', 'green');
+        $off = new OutputFormatterStyle('black', 'black');
+        $output->getFormatter()->setStyle('lit', $lit);
+        $output->getFormatter()->setStyle('off', $off);
+
+        $output->writeln(str_repeat("-", count($displayPixels[0])));
+
         $output->writeln("<info>The are $litPixels lit pixels.</info>");
+
+        $output->writeln(str_repeat("-", count($displayPixels[0])));
+
+        foreach ($displayPixels as $line) {
+            foreach ($line as $pixel) {
+                $pixel ? $output->write("<lit>#</lit>") : $output->write("<off>.</off>");
+            }
+            $output->writeln("");
+        }
+
+        $output->writeln(str_repeat("-", count($displayPixels[0])));
     }
 }

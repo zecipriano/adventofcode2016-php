@@ -147,4 +147,14 @@ class Display
 
         echo "\n--- ------- ---\n";
     }
+
+    /**
+     * Returns the display.
+     *
+     * @return array The display.
+     */
+    public function getDisplay() : array
+    {
+        return $this->display;
+    }
 }
