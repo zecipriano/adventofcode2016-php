@@ -5,63 +5,86 @@ namespace AdventOfCode2016\Day05;
 class PasswordGenerator
 {
     const PASSWORD_SIZE = 8;
-    const HASH_ZEROS = "00000";
+    const HASH_ZEROS = 5;
+    const STRING_ZEROS = "00000";
 
     /**
-     * Generate a password for the given $doorID.
+     * Generate a password and a improved password for the given $doorID.
      *
-     * @param  string  $doorID       The door ID to generate a password for
+     * @param  string  $doorID The door ID to generate a password for
      *
-     * @return string                The generated password
+     * @return array          The generated passwords
      */
-    public function generate(string $doorID) : string
+    public function generate(string $doorID) : array
     {
         $password = "";
+        $improvedPassword = [];
         $index = 0;
+        $passNotDone = strlen($password) < self::PASSWORD_SIZE;
+        $impPassNotDone = count($improvedPassword) < self::PASSWORD_SIZE;
 
-        while (strlen($password) < self::PASSWORD_SIZE) {
+        while ($passNotDone || $impPassNotDone) {
             $hash = md5($doorID . $index);
 
-            if (strcmp(substr($hash, 0, 5), self::HASH_ZEROS) === 0) {
+            $hashIsValid = $this->checkHash($hash);
+
+            if ($hashIsValid && $passNotDone) {
                 $password .= $hash[5];
+                $passNotDone = strlen($password) < self::PASSWORD_SIZE;
+            }
+
+            if ($hashIsValid && $impPassNotDone) {
+                $this->checkPositionAndFill($improvedPassword, $hash);
+                $impPassNotDone = count($improvedPassword) < self::PASSWORD_SIZE;
             }
 
             $index++;
         }
 
-        return $password;
+        ksort($improvedPassword);
+
+        return [
+            'password' => $password,
+            'improvedPassword' => implode($improvedPassword),
+        ];
     }
 
     /**
-     * Generate an improved password for the given $doorID
+     * Determines the position to fill and, if its valid, fills it.
      *
-     * @param  string $doorID The door ID
-     *
-     * @return string         The improved password
+     * @param  array  $password The array with the password chars.
+     * @param  string $hash     The hash to determine the position.
      */
-    public function generateImprovedPassword(string $doorID) : string
+    protected function checkPositionAndFill(
+        array &$password,
+        string $hash
+    ) : void {
+        $position = filter_var($hash[5], FILTER_VALIDATE_INT);
+
+        $isInt = is_int($position);
+        $positionIsPossible = $position < self::PASSWORD_SIZE;
+        $isNotFilledYet = !isset($password[$position]);
+
+        if ($isInt && $positionIsPossible && $isNotFilledYet) {
+            $password[$position] = $hash[6];
+        }
+    }
+
+    /**
+     * Check if the given $hash starts with the defined amount of zeros.
+     *
+     * @param  string $hash The hash to check.
+     *
+     * @return bool   Whether the hash starts with the defined amount of zeros.
+     */
+    protected function checkHash(string $hash) : bool
     {
-        $password = [];
-        $index = 0;
+        $hashSignificantChars = substr($hash, 0, self::HASH_ZEROS);
 
-        while (count($password) < self::PASSWORD_SIZE) {
-            $hash = md5($doorID . $index);
-
-            if (strcmp(substr($hash, 0, 5), self::HASH_ZEROS) === 0) {
-                $position = filter_var($hash[5], FILTER_VALIDATE_INT);
-
-                if (is_int($position) &&
-                    $position < self::PASSWORD_SIZE &&
-                    !isset($password[$position])
-                ) {
-                    $password[$position] = $hash[6];
-                }
-            }
-
-            $index++;
+        if (strcmp($hashSignificantChars, self::STRING_ZEROS) === 0) {
+            return true;
         }
 
-        ksort($password);
-        return implode($password);
+        return false;
     }
 }

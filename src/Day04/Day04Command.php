@@ -2,10 +2,10 @@
 
 namespace AdventOfCode2016\Day04;
 
-use AdventOfCode2016\Utils\FileReader;
-use AdventOfCode2016\Day04\Room;
 use AdventOfCode2016\Day04\Decryptor;
+use AdventOfCode2016\Day04\Room;
 use AdventOfCode2016\Day04\RoomStringParser;
+use AdventOfCode2016\Utils\FileReader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,10 +16,11 @@ class Day04Command extends Command
     protected function configure()
     {
         $this->setName('day04')
+            ->setDescription('Day 04: Security Through Obscurity')
             ->addArgument(
                 'input',
                 InputArgument::REQUIRED,
-                'The file with the input string.'
+                'The file with the input.'
             );
     }
 
@@ -39,15 +40,18 @@ class Day04Command extends Command
         $sum = 0;
 
         foreach ($lines as $line) {
-            $parsedLine = $parser->parse($line);
+            $parsed = $parser->parse($line);
+            $name = $parsed['name'];
+            $checksum = $parsed['checksum'];
+            $id = $parsed['id'];
 
-            if ($room->valCheckSum($parsedLine['name'], $parsedLine['checksum'])) {
-                $sum += $parsedLine['id'];
+            if ($room->valCheckSum($name, $checksum)) {
+                $sum += $id;
 
-                $decryptedString = $decryptor->decrypt($parsedLine['name'], $parsedLine['id']);
+                $decrypted = $decryptor->decrypt($name, $id);
 
-                if (strpos($decryptedString, "object")) {
-                    $output->writeln("<info>" . $decryptedString . " [" . $parsedLine['id'] . "].</info>");
+                if (strpos($decrypted, "object")) {
+                    $output->writeln("<info>$decrypted [$id].</info>");
                 }
             }
         }

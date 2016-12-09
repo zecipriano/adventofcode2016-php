@@ -30,7 +30,8 @@ class Decryptor
             $newCharValue = ord($char) + $rotation;
 
             if ($newCharValue > self::ASCII_LOWER_Z) {
-                $newCharValue = self::ASCII_LOWER_A + ($newCharValue - 1 - self::ASCII_LOWER_Z);
+                $excess = $newCharValue - 1 - self::ASCII_LOWER_Z;
+                $newCharValue = self::ASCII_LOWER_A + $excess;
             }
 
             $arrayChars[$index] = chr($newCharValue);

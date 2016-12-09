@@ -3,47 +3,76 @@
 namespace tests;
 
 use PHPUnit\Framework\TestCase;
-use AdventOfCode2016\Day02\Keypad;
+use AdventOfCode2016\Day02\NormalKeypad;
+use AdventOfCode2016\Day02\AlternativeKeypad;
 
 class KeypadTest extends TestCase
 {
-    protected $keypad;
-
-    protected function setUp()
+    public function testNormalKeypad()
     {
-        $this->keypad = new Keypad();
+        $keypad = new NormalKeypad();
+        $keypad->moveCurrentButton('U');
+        $keypad->moveCurrentButton('L');
+        $keypad->moveCurrentButton('L');
+
+        $this->assertEquals('1', $keypad->getCurrentButton());
+
+        $keypad->moveCurrentButton('R');
+        $keypad->moveCurrentButton('R');
+        $keypad->moveCurrentButton('D');
+        $keypad->moveCurrentButton('D');
+        $keypad->moveCurrentButton('D');
+
+        $this->assertEquals('9', $keypad->getCurrentButton());
+
+        $keypad->moveCurrentButton('L');
+        $keypad->moveCurrentButton('U');
+        $keypad->moveCurrentButton('R');
+        $keypad->moveCurrentButton('D');
+        $keypad->moveCurrentButton('L');
+
+        $this->assertEquals('8', $keypad->getCurrentButton());
+
+        $keypad->moveCurrentButton('U');
+        $keypad->moveCurrentButton('U');
+        $keypad->moveCurrentButton('U');
+        $keypad->moveCurrentButton('U');
+        $keypad->moveCurrentButton('D');
+
+        $this->assertEquals('5', $keypad->getCurrentButton());
     }
 
-    public function testKeypad1()
+    public function testAlternativeKeypad()
     {
-        $this->keypad->move("U");
-        $this->keypad->move("L");
-        $this->keypad->move("L");
+        $keypad = new AlternativeKeypad();
+        $keypad->moveCurrentButton('U');
+        $keypad->moveCurrentButton('L');
+        $keypad->moveCurrentButton('L');
 
-        $this->assertEquals(1, $this->keypad->getCurrentButton());
+        $this->assertEquals('5', $keypad->getCurrentButton());
 
-        $this->keypad->move("R");
-        $this->keypad->move("R");
-        $this->keypad->move("D");
-        $this->keypad->move("D");
-        $this->keypad->move("D");
+        $keypad->moveCurrentButton('R');
+        $keypad->moveCurrentButton('R');
+        $keypad->moveCurrentButton('D');
+        $keypad->moveCurrentButton('D');
+        $keypad->moveCurrentButton('D');
 
-        $this->assertEquals(9, $this->keypad->getCurrentButton());
+        $this->assertEquals('D', $keypad->getCurrentButton());
 
-        $this->keypad->move("L");
-        $this->keypad->move("U");
-        $this->keypad->move("R");
-        $this->keypad->move("D");
-        $this->keypad->move("L");
+        $keypad->moveCurrentButton('L');
+        $keypad->moveCurrentButton('U');
+        $keypad->moveCurrentButton('R');
+        $keypad->moveCurrentButton('D');
+        $keypad->moveCurrentButton('L');
 
-        $this->assertEquals(8, $this->keypad->getCurrentButton());
+        $this->assertEquals('B', $keypad->getCurrentButton());
 
-        $this->keypad->move("U");
-        $this->keypad->move("U");
-        $this->keypad->move("U");
-        $this->keypad->move("U");
-        $this->keypad->move("D");
+        $keypad->moveCurrentButton('U');
+        $keypad->moveCurrentButton('U');
+        $keypad->moveCurrentButton('U');
+        $keypad->moveCurrentButton('U');
+        $keypad->moveCurrentButton('D');
 
-        $this->assertEquals(5, $this->keypad->getCurrentButton());
+        $this->assertEquals('3', $keypad->getCurrentButton());
     }
 }

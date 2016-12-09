@@ -61,7 +61,8 @@ class Retriever
     public function getFirstRepeatedDistance() : int
     {
         if ($this->firstVisitedTwicePosition) {
-            return abs($this->firstVisitedTwicePosition[0]) + abs($this->firstVisitedTwicePosition[1]);
+            return abs($this->firstVisitedTwicePosition[0]) +
+                   abs($this->firstVisitedTwicePosition[1]);
         }
 
         return 0;
@@ -125,8 +126,12 @@ class Retriever
      * @param  int    $endY   The Y coordinate of the ending position.
      * @return void
      */
-    protected function countBlockVisits(int $startX, int $startY, int $endX, int $endY)
-    {
+    protected function countBlockVisits(
+        int $startX,
+        int $startY,
+        int $endX,
+        int $endY
+    ) : void {
         for ($x = $startX; $x <= $endX; $x++) {
             for ($y = $startY; $y <= $endY; $y++) {
                 if (!isset($this->visitedPositions[$x][$y])) {
@@ -135,7 +140,8 @@ class Retriever
 
                 $this->visitedPositions[$x][$y]++;
 
-                if (!$this->firstVisitedTwicePosition && $this->visitedPositions[$x][$y] == 2) {
+                if (!$this->firstVisitedTwicePosition &&
+                    $this->visitedPositions[$x][$y] == 2) {
                     $this->firstVisitedTwicePosition = [$x, $y];
                 }
             }

@@ -2,8 +2,8 @@
 
 namespace AdventOfCode2016\Day06;
 
-use AdventOfCode2016\Utils\FileReader;
 use AdventOfCode2016\Day06\MessageCorrector;
+use AdventOfCode2016\Utils\FileReader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,10 +14,11 @@ class Day06Command extends Command
     protected function configure()
     {
         $this->setName('day06')
+            ->setDescription('Day 06: Signals and Noise')
             ->addArgument(
                 'input',
                 InputArgument::REQUIRED,
-                'The file with the input string.'
+                'The file with the input.'
             );
     }
 
@@ -34,10 +35,17 @@ class Day06Command extends Command
 
         $corrector = new MessageCorrector();
 
-        $correctedMessage = $corrector->correct($lines);
-        $correctedMessageLeastCommon = $corrector->correctLeastCommon($lines);
+        $correctedMessageMC = $corrector->correctMC($lines);
+        $correctedMessageLC = $corrector->correctLC($lines);
 
-        $output->writeln("<info>The corrected message is $correctedMessage</info>");
-        $output->writeln("<info>The corrected message (with the least common char method) is $correctedMessageLeastCommon</info>");
+        $output->writeln(
+            "<info>The corrected message (with the most common char method) " .
+            "is:  $correctedMessageMC</info>"
+        );
+
+        $output->writeln(
+            "<info>The corrected message (with the least common char method) " .
+            "is: $correctedMessageLC</info>"
+        );
     }
 }

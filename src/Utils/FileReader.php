@@ -35,7 +35,11 @@ class FileReader
      */
     public function getArrayOfLines() : array
     {
-        $array = file($this->filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $array = file(
+            $this->filename,
+            FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES
+        );
+        
         return $array;
     }
 }
