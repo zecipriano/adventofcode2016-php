@@ -2,11 +2,11 @@
 
 namespace AdventOfCode2016\Day05;
 
+use AdventOfCode2016\Day05\PasswordGenerator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use AdventOfCode2016\Day05\PasswordGenerator;
 
 class Day05Command extends Command
 {

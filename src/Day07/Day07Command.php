@@ -2,12 +2,12 @@
 
 namespace AdventOfCode2016\Day07;
 
+use AdventOfCode2016\Day07\IPChecker;
 use AdventOfCode2016\Utils\FileReader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use AdventOfCode2016\Day07\IPChecker;
 
 class Day07Command extends Command
 {
@@ -18,7 +18,7 @@ class Day07Command extends Command
             ->addArgument(
                 'input',
                 InputArgument::REQUIRED,
-                'The file with the input string.'
+                'The file with the input.'
             );
     }
 

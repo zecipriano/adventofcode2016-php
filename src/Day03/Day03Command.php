@@ -2,8 +2,8 @@
 
 namespace AdventOfCode2016\Day03;
 
-use AdventOfCode2016\Utils\FileReader;
 use AdventOfCode2016\Day03\TriangleValidator;
+use AdventOfCode2016\Utils\FileReader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

@@ -2,8 +2,8 @@
 
 namespace AdventOfCode2016\Day06;
 
-use AdventOfCode2016\Utils\FileReader;
 use AdventOfCode2016\Day06\MessageCorrector;
+use AdventOfCode2016\Utils\FileReader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,7 +18,7 @@ class Day06Command extends Command
             ->addArgument(
                 'input',
                 InputArgument::REQUIRED,
-                'The file with the input string.'
+                'The file with the input.'
             );
     }
 

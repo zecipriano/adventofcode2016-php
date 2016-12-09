@@ -6,10 +6,10 @@ use AdventOfCode2016\Day08\Display;
 use AdventOfCode2016\Day08\DisplayOperationParser;
 use AdventOfCode2016\Utils\FileReader;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 class Day08Command extends Command
 {
@@ -20,7 +20,7 @@ class Day08Command extends Command
             ->addArgument(
                 'input',
                 InputArgument::REQUIRED,
-                'The file with the input string.'
+                'The file with the input.'
             );
     }
 
