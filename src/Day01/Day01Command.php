@@ -14,10 +14,11 @@ class Day01Command extends Command
     protected function configure()
     {
         $this->setName('day01')
+            ->setDescription('Day 01: No Time for a Taxicab')
             ->addArgument(
                 'input',
                 InputArgument::REQUIRED,
-                'The file with the input string.'
+                'The file with the input.'
             );
     }
 
@@ -43,7 +44,10 @@ class Day01Command extends Command
         $blocks = $retriever->getDistance();
         $firstTwice = $retriever->getFirstRepeatedDistance();
 
-        $output->writeln("<info>The Easter Bunny HQ is $blocks blocks away</info>");
-        $output->writeln("<info>The first location visited twice is $firstTwice blocks away</info>");
+        $output->writeln("<info>The Easter Bunny HQ is $blocks blocks away".
+                         "</info>");
+
+        $output->writeln("<info>The first location visited twice is " .
+                         "$firstTwice blocks away</info>");
     }
 }
