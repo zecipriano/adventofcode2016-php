@@ -5,17 +5,21 @@ namespace AdventOfCode2016\Day09;
 class Decompressor
 {
     /**
-     * Decompresses the given string.
+     * Returns the lenght of the decompressed string.
      *
-     * @param  string $string The string to decompress.
+     * @param  string  $string    The string to decompress.
+     * @param  boolean $recursive Whether to decompress the decompressed
+     *                            substrings.
      *
-     * @return string         The decompressed string.
+     * @return int                The lenght of the decompressed string.
      */
-    public function decompress(string $string) : string
-    {
+    public function decompressedLength(
+        string $string,
+        bool $recursive = false
+    ) : int {
         $stringLength = strlen($string);
         $index = 0;
-        $decompressedString = "";
+        $decompressedLenght = 0;
 
         while ($index < $stringLength) {
             // If the current char is a '(' we are in the beginning of a marker.
@@ -38,9 +42,15 @@ class Decompressor
                 $nChars = $marker[0];
                 $nRepetitions = $marker[1];
 
-                // Add the resulting substring to the decompressed string.
-                $subString = substr($string, $index, $nChars);
-                $decompressedString .= str_repeat($subString, $nRepetitions);
+                // Add the resulting substring length to the decompressed string
+                // lenght.
+                if ($recursive) {
+                    $subString = substr($string, $index, $nChars);
+                    $subLength = $this->decompressedLength($subString, true);
+                    $decompressedLenght += $nRepetitions * $subLength;
+                } else {
+                    $decompressedLenght += $nRepetitions * $nChars;
+                }
 
                 // Jump the index to the end of the repeated substring and
                 // continue.
@@ -49,22 +59,10 @@ class Decompressor
             }
 
             // If it is a regular char just add it to the decompressed string.
-            $decompressedString .= $string[$index];
+            $decompressedLenght++;
             $index++;
         }
 
-        return $decompressedString;
-    }
-
-    /**
-     * Decompresses the given string and returns the lenght of the given string.
-     *
-     * @param  string $string The string to decompress.
-     * @return int            The length of the decompressed string.
-     */
-    public function decompressedLength(string $string) : int
-    {
-        $decompressedString = $this->decompress($string);
-        return strlen($decompressedString);
+        return $decompressedLenght;
     }
 }

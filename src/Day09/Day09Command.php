@@ -36,7 +36,9 @@ class Day09Command extends Command
 
         $decompressor = new Decompressor();
         $decompressedLength = $decompressor->decompressedLength($string);
-
         $output->writeln("<info>The decompressed length is $decompressedLength.</info>");
+
+        $improvedDecompressedLength = $decompressor->decompressedLength($string, true);
+        $output->writeln("<info>The decompressed length using the improved format is $improvedDecompressedLength.</info>");
     }
 }
