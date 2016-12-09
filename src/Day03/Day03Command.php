@@ -14,10 +14,11 @@ class Day03Command extends Command
     protected function configure()
     {
         $this->setName('day03')
+            ->setDescription('Day 03: Squares With Three Sides')
             ->addArgument(
                 'input',
                 InputArgument::REQUIRED,
-                'The file with the input string.'
+                'The file with the input.'
             );
     }
 
@@ -38,31 +39,42 @@ class Day03Command extends Command
         $validColumnTriangles = 0;
 
         foreach ($lines as $triangleSides) {
+            // Triangle defined in a line.
             $side1 = intval(strtok($triangleSides, " "));
-            array_push($columnTriangles[0], $side1);
-
             $side2 = intval(strtok(" "));
-            array_push($columnTriangles[1], $side2);
-
             $side3 = intval(strtok(" "));
+
+            // Triangles defined in columns.
+            array_push($columnTriangles[0], $side1);
+            array_push($columnTriangles[1], $side2);
             array_push($columnTriangles[2], $side3);
 
+            // Validate the triangle defined in a line.
             if ($validator->validate($side1, $side2, $side3)) {
                 $validTriangles++;
             }
 
+            // Every 3 lines, validate the triangles defined in columns.
             if (count($columnTriangles[0]) === 3) {
-                foreach ($columnTriangles as $columnTriangle) {
-                    if ($validator->validate($columnTriangle[0], $columnTriangle[1], $columnTriangle[2])) {
+                foreach ($columnTriangles as $cTriangle) {
+                    $cSide1 = $cTriangle[0];
+                    $cSide2 = $cTriangle[1];
+                    $cSide3 = $cTriangle[2];
+
+                    if ($validator->validate($cSide1, $cSide2, $cSide3)) {
                         $validColumnTriangles++;
                     }
                 }
 
+                // Reset the array for the next 3 lines.
                 $columnTriangles = [[], [], []];
             }
         }
 
-        $output->writeln("<info>There are $validTriangles valid triangles.</info>");
-        $output->writeln("<info>If defined in columns, there are $validColumnTriangles valid triangles.</info>");
+        $output->writeln("<info>There are $validTriangles valid triangles." .
+                         "</info>");
+
+        $output->writeln("<info>If defined in columns, there are " .
+                         "$validColumnTriangles valid triangles.</info>");
     }
 }
