@@ -2,8 +2,8 @@
 
 namespace AdventOfCode2016\Day02;
 
-use AdventOfCode2016\Day02\Keypad;
 use AdventOfCode2016\Day02\AlternativeKeypad;
+use AdventOfCode2016\Day02\NormalKeypad;
 use AdventOfCode2016\Utils\FileReader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -15,10 +15,11 @@ class Day02Command extends Command
     protected function configure()
     {
         $this->setName('day02')
+            ->setDescription('Day 02: Bathroom Security')
             ->addArgument(
                 'input',
                 InputArgument::REQUIRED,
-                'The file with the input string.'
+                'The file with the input.'
             );
     }
 
@@ -33,24 +34,27 @@ class Day02Command extends Command
 
         $lines = $file->getArrayOfLines();
 
-        $keypad = new Keypad();
+        $normalKeypad = new NormalKeypad();
         $altKeypad = new AlternativeKeypad();
-        $code = "";
+        $normalCode = "";
         $altCode = "";
 
         foreach ($lines as $line) {
             $chars = str_split($line);
 
             foreach ($chars as $char) {
-                $keypad->move($char);
-                $altKeypad->move($char);
+                $normalKeypad->moveCurrentButton($char);
+                $altKeypad->moveCurrentButton($char);
             }
 
-            $code = $code . $keypad->getCurrentButton();
-            $altCode = $altCode . $altKeypad->getCurrentButton();
+            $normalCode .= $normalKeypad->getCurrentButton();
+            $altCode .= $altKeypad->getCurrentButton();
         }
 
-        $output->writeln("<info>The bathroom code is $code.</info>");
-        $output->writeln("<info>The alternative bathroom code is $altCode.</info>");
+        $output->writeln("<info>The normal bathroom code is $normalCode." .
+                         "</info>");
+
+        $output->writeln("<info>The alternative bathroom code is $altCode." .
+                         "</info>");
     }
 }
