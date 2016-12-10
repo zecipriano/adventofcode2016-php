@@ -39,5 +39,11 @@ class Day10Command extends Command
         foreach ($lines as $instruction) {
             $factory->dispatchInstruction($instruction);
         }
+
+        $calc = $factory->getOutput(0)->getReceivedValues()[0] *
+                $factory->getOutput(1)->getReceivedValues()[0] *
+                $factory->getOutput(2)->getReceivedValues()[0];
+
+        $output->writeln("output 0 * output 1 * output 2 = " . $calc);
     }
 }
