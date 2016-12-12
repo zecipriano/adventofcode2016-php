@@ -4,9 +4,48 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2accbf4465b280ac6770580c76f7d49b",
-    "content-hash": "393f42a676db4c38b89fa6f87526cadb",
+    "hash": "f86b1b88ed40a72d8e8057f5c0fa2da3",
+    "content-hash": "8b148fa82aa8767d64a343b4fe1efe12",
     "packages": [
+        {
+            "name": "kieranajp/combinator",
+            "version": "v0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kieranajp/combinator.git",
+                "reference": "9142b5290fcbb3d4e950eed3efbecfbd94e6a0f4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kieranajp/combinator/zipball/9142b5290fcbb3d4e950eed3efbecfbd94e6a0f4",
+                "reference": "9142b5290fcbb3d4e950eed3efbecfbd94e6a0f4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kieranajp\\Combinator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kieran Patel",
+                    "email": "me@kieranajp.co.uk"
+                }
+            ],
+            "description": "Generates combinations of a set.",
+            "time": "2016-06-09 16:10:12"
+        },
         {
             "name": "psr/log",
             "version": "1.0.2",
