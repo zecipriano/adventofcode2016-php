@@ -36,6 +36,10 @@ class Day12Command extends Command
         $computer = new Computer();
         $computer->execute($instructionSet);
 
-        $output->writeln("a: " . $computer->getRegisterValue('a'));
+        $output->writeln("[a 0, b 0, c 0, d 0] a: " . $computer->getRegisterValue('a'));
+
+        $computer = new Computer(['a' => 0, 'b' => 0, 'c' => 1, 'd' => 0]);
+        $computer->execute($instructionSet);
+        $output->writeln("[a 0, b 0, c 1, d 0] a: " . $computer->getRegisterValue('a'));
     }
 }

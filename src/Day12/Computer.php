@@ -6,7 +6,7 @@ class Computer
 {
     protected $registers;
 
-    public function __construct()
+    public function __construct(array $registers = null)
     {
         $this->registers = [
             'a' => 0,
@@ -14,6 +14,10 @@ class Computer
             'c' => 0,
             'd' => 0,
         ];
+
+        if ($registers) {
+            $this->registers = $registers;
+        }
     }
 
     /**
