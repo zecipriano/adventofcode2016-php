@@ -18,10 +18,21 @@ class Day11Command extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $start = microtime(true);
         $elevatorFloor = 0;
         $objects = [0, 0, 1, 2, 1, 2, 1, 2, 1, 2];
         $steps = new Steps($elevatorFloor, $objects);
         $moves = $steps->move();
-        $output->writeln("<info>Moves: $moves</info>");
+        $end = microtime(true);
+        $output->writeln("<info>Moves 1: $moves (in " . round($end - $start, 2) ."s)</info>");
+
+        ini_set('memory_limit', '2000M');
+        $start = microtime(true);
+        $elevatorFloor = 0;
+        $objects = [0, 0, 1, 2, 1, 2, 1, 2, 1, 2, 0, 0, 0, 0];
+        $steps = new Steps($elevatorFloor, $objects);
+        $moves = $steps->move();
+        $end = microtime(true);
+        $output->writeln("<info>Moves 2: $moves (in " . round($end - $start, 2) ."s)</info>");
     }
 }

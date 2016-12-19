@@ -26,7 +26,7 @@ class Steps
         $depth = 0;
         $currentArrangements = [$this->initialArrangement];
         $arrangementID = $this->initialArrangement->__toString();
-        $this->previousArrangements[] = $arrangementID;
+        $this->previousArrangements[$arrangementID] = 1;
 
         while (true) {
             $nextArrangements = [];
@@ -66,8 +66,8 @@ class Steps
     {
         $arrangementID = $arrangement->__toString();
 
-        if (!in_array($arrangementID, $this->previousArrangements)) {
-            $this->previousArrangements[] = $arrangementID;
+        if (!array_key_exists($arrangementID, $this->previousArrangements)) {
+            $this->previousArrangements[$arrangementID] = 1;
             return true;
         }
 
