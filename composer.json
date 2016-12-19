@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "symfony/console": "^3.2"
+        "symfony/console": "^3.2",
+        "kieranajp/combinator": "^0.1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.6"
