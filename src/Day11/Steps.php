@@ -2,17 +2,18 @@
 
 namespace AdventOfCode2016\Day11;
 
-use AdventOfCode2016\Day11\Arrangement;
+use AdventOfCode2016\Day11\ArrangementManager;
+use AdventOfCode2016\Day11\ArrangementIdentifier;
 
 class Steps
 {
-    protected $initialArrangement;
+    use ArrangementIdentifier;
+
     protected $previousArrangements;
 
-    public function __construct(int $elevatorFloor, array $objects)
+    public function __construct()
     {
         $this->previousArrangements = [];
-        $this->initialArrangement = new Arrangement($elevatorFloor, $objects);
     }
 
     /**
@@ -21,11 +22,12 @@ class Steps
      * @return int|null The number of moves needed to put all objects on the top
      *                  floor. Null if not possible.
      */
-    public function move() : ?int
+    public function move(array $initialArrangement) : ?int
     {
         $depth = 0;
-        $currentArrangements = [$this->initialArrangement];
-        $arrangementID = $this->initialArrangement->__toString();
+        $arrangementManager = new ArrangementManager();
+        $currentArrangements = [$initialArrangement];
+        $arrangementID = $this->identifier($initialArrangement);
         $this->previousArrangements[$arrangementID] = 1;
 
         while (true) {
@@ -33,13 +35,13 @@ class Steps
             $depth++;
 
             foreach ($currentArrangements as $arrangement) {
-                $possibleArrangements = $arrangement->nextPossibleArrangements();
+                $possibleArrangements = $arrangementManager->nextPossibleArrangements($arrangement);
 
                 foreach ($possibleArrangements as $possibleArrangement) {
                     if ($this->isNewArrangement($possibleArrangement, $depth)) {
                         $nextArrangements[] = $possibleArrangement;
 
-                        if ($possibleArrangement->allObjectsOnTopFloor()) {
+                        if ($arrangementManager->allObjectsOnTopFloor($possibleArrangement)) {
                             return $depth;
                         }
                     }
@@ -62,9 +64,9 @@ class Steps
      * @return bool                     Whether it is the first time the
      *                                  arrangement appears.
      */
-    public function isNewArrangement(Arrangement $arrangement) : bool
+    public function isNewArrangement(array $arrangement) : bool
     {
-        $arrangementID = $arrangement->__toString();
+        $arrangementID = $this->identifier($arrangement);
 
         if (!array_key_exists($arrangementID, $this->previousArrangements)) {
             $this->previousArrangements[$arrangementID] = 1;

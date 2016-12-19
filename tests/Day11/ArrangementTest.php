@@ -2,7 +2,7 @@
 
 namespace tests\Day11;
 
-use AdventOfCode2016\Day11\Arrangement;
+use AdventOfCode2016\Day11\ArrangementManager;
 use PHPUnit\Framework\TestCase;
 
 class ArrangementTest extends TestCase
@@ -12,46 +12,31 @@ class ArrangementTest extends TestCase
     /**
      * @dataProvider configurationsProvider
      */
-    public function testIfConfigurationIsPossible(int $elevatorFloor, array $objects, bool $expected)
+    public function testIfConfigurationIsPossible(array $arrangement, bool $expected)
     {
-        $arrangement = new Arrangement();
-        $this->assertEquals($expected, $arrangement->set($elevatorFloor, $objects));
+        $arrangementManager = new ArrangementManager();
+        $this->assertEquals($expected, $arrangementManager->isPossible($arrangement['objects']));
     }
 
     /**
      * @dataProvider nextArrangementsProvider
      */
     public function testItGeneratesNextConfigurations(
-        int $elevatorFloor,
-        array $objects,
+        array $arrangement,
         array $expected
     ) {
-        $arrangement = new Arrangement();
-        $arrangement->set($elevatorFloor, $objects);
 
-        $next = $arrangement->nextPossibleArrangements();
+        $arrangementManager = new ArrangementManager();
+        $next = $arrangementManager->nextPossibleArrangements($arrangement);
         $this->assertEquals($expected, $next);
-    }
-
-    public function testItComparesArrangements()
-    {
-        $arr1 = new Arrangement(0, [1, 0, 2, 0]);
-        $arr2 = new Arrangement(0, [1, 0, 2, 0]);
-
-        $this->assertTrue($arr1->isEqual($arr2));
-
-        $arr1 = new Arrangement(0, [1, 0, 2, 0]);
-        $arr2 = new Arrangement(0, [1, 0, 2, 3]);
-
-        $this->assertFalse($arr1->isEqual($arr2));
     }
 
     public function configurationsProvider()
     {
         return [
-            [0, [1, 0, 2, 0], true],
-            [0, [1, 1, 2, 0], true],
-            [0, [1, 2, 2, 0], false],
+            [['elevator' => 0, 'objects' => [1, 0, 2, 0]], true],
+            [['elevator' => 0, 'objects' => [1, 1, 2, 0]], true],
+            [['elevator' => 0, 'objects' => [1, 2, 2, 0]], false],
         ];
     }
 
@@ -59,53 +44,55 @@ class ArrangementTest extends TestCase
     {
         return [
             [
-                0, [1, 0, 2, 0],
-                [new Arrangement(1, [1, 1, 2, 0])]
+                ['elevator' => 0, 'objects' => [1, 0, 2, 0]],
+                [
+                    ['elevator' => 1, 'objects' => [1, 1, 2, 0]]
+                ]
             ],
             [
-                3, [3, 3, 3, 3],
+                ['elevator' => 3, 'objects' => [3, 3, 3, 3]],
                 []
             ],
             [
-                2, [2, 2, 2, 2],
+                ['elevator' => 2, 'objects' => [2, 2, 2, 2]],
                 [
-                    new Arrangement(3, [2, 3, 2 ,2]),
-                    new Arrangement(3, [2, 2, 2, 3]),
-                    new Arrangement(3, [3, 3, 2, 2]),
-                    new Arrangement(3, [3, 2, 3, 2]),
-                    new Arrangement(3, [2, 3, 2, 3]),
-                    new Arrangement(3, [2, 2, 3, 3]),
+                    ['elevator' => 3, 'objects' => [2, 3, 2 ,2]],
+                    ['elevator' => 3, 'objects' => [2, 2, 2, 3]],
+                    ['elevator' => 3, 'objects' => [3, 3, 2, 2]],
+                    ['elevator' => 3, 'objects' => [3, 2, 3, 2]],
+                    ['elevator' => 3, 'objects' => [2, 3, 2, 3]],
+                    ['elevator' => 3, 'objects' => [2, 2, 3, 3]],
                 ]
             ],
             [
-                2, [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+                ['elevator' => 2, 'objects' => [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]],
                 [
-                    new Arrangement(3, [2, 3, 2, 2, 2, 2, 2, 2, 2, 2]),
-                    new Arrangement(3, [2, 2, 2, 3, 2, 2, 2, 2, 2, 2]),
-                    new Arrangement(3, [2, 2, 2, 2, 2, 3, 2, 2, 2, 2]),
-                    new Arrangement(3, [2, 2, 2, 2, 2, 2, 2, 3, 2, 2]),
-                    new Arrangement(3, [2, 2, 2, 2, 2, 2, 2, 2, 2, 3]),
-                    new Arrangement(3, [3, 3, 2, 2, 2, 2, 2, 2, 2, 2]),
-                    new Arrangement(3, [2, 3, 2, 3, 2, 2, 2, 2, 2, 2]),
-                    new Arrangement(3, [2, 3, 2, 2, 2, 3, 2, 2, 2, 2]),
-                    new Arrangement(3, [2, 3, 2, 2, 2, 2, 2, 3, 2, 2]),
-                    new Arrangement(3, [2, 3, 2, 2, 2, 2, 2, 2, 2, 3]),
-                    new Arrangement(3, [2, 2, 3, 3, 2, 2, 2, 2, 2, 2]),
-                    new Arrangement(3, [2, 2, 2, 3, 2, 3, 2, 2, 2, 2]),
-                    new Arrangement(3, [2, 2, 2, 3, 2, 2, 2, 3, 2, 2]),
-                    new Arrangement(3, [2, 2, 2, 3, 2, 2, 2, 2, 2, 3]),
-                    new Arrangement(3, [2, 2, 2, 2, 3, 3, 2, 2, 2, 2]),
-                    new Arrangement(3, [2, 2, 2, 2, 2, 3, 2, 3, 2, 2]),
-                    new Arrangement(3, [2, 2, 2, 2, 2, 3, 2, 2, 2, 3]),
-                    new Arrangement(3, [2, 2, 2, 2, 2, 2, 3, 3, 2, 2]),
-                    new Arrangement(3, [2, 2, 2, 2, 2, 2, 2, 3, 2, 3]),
-                    new Arrangement(3, [2, 2, 2, 2, 2, 2, 2, 2, 3, 3]),
+                    ['elevator' => 3, 'objects' => [2, 3, 2, 2, 2, 2, 2, 2, 2, 2]],
+                    ['elevator' => 3, 'objects' => [2, 2, 2, 3, 2, 2, 2, 2, 2, 2]],
+                    ['elevator' => 3, 'objects' => [2, 2, 2, 2, 2, 3, 2, 2, 2, 2]],
+                    ['elevator' => 3, 'objects' => [2, 2, 2, 2, 2, 2, 2, 3, 2, 2]],
+                    ['elevator' => 3, 'objects' => [2, 2, 2, 2, 2, 2, 2, 2, 2, 3]],
+                    ['elevator' => 3, 'objects' => [3, 3, 2, 2, 2, 2, 2, 2, 2, 2]],
+                    ['elevator' => 3, 'objects' => [2, 3, 2, 3, 2, 2, 2, 2, 2, 2]],
+                    ['elevator' => 3, 'objects' => [2, 3, 2, 2, 2, 3, 2, 2, 2, 2]],
+                    ['elevator' => 3, 'objects' => [2, 3, 2, 2, 2, 2, 2, 3, 2, 2]],
+                    ['elevator' => 3, 'objects' => [2, 3, 2, 2, 2, 2, 2, 2, 2, 3]],
+                    ['elevator' => 3, 'objects' => [2, 2, 3, 3, 2, 2, 2, 2, 2, 2]],
+                    ['elevator' => 3, 'objects' => [2, 2, 2, 3, 2, 3, 2, 2, 2, 2]],
+                    ['elevator' => 3, 'objects' => [2, 2, 2, 3, 2, 2, 2, 3, 2, 2]],
+                    ['elevator' => 3, 'objects' => [2, 2, 2, 3, 2, 2, 2, 2, 2, 3]],
+                    ['elevator' => 3, 'objects' => [2, 2, 2, 2, 3, 3, 2, 2, 2, 2]],
+                    ['elevator' => 3, 'objects' => [2, 2, 2, 2, 2, 3, 2, 3, 2, 2]],
+                    ['elevator' => 3, 'objects' => [2, 2, 2, 2, 2, 3, 2, 2, 2, 3]],
+                    ['elevator' => 3, 'objects' => [2, 2, 2, 2, 2, 2, 3, 3, 2, 2]],
+                    ['elevator' => 3, 'objects' => [2, 2, 2, 2, 2, 2, 2, 3, 2, 3]],
+                    ['elevator' => 3, 'objects' => [2, 2, 2, 2, 2, 2, 2, 2, 3, 3]],
                 ]
             ],
             [
-                0, [0, 0, 1, 2, 1, 2, 1, 2, 1, 2],
+                ['elevator' => 0, 'objects' => [0, 0, 1, 2, 1, 2, 1, 2, 1, 2]],
                 [
-                    new Arrangement(1, [1, 1, 1, 2, 1, 2, 1, 2, 1, 2])
+                    ['elevator' => 1, 'objects' => [1, 1, 1, 2, 1, 2, 1, 2, 1, 2]]
                 ]
             ]
         ];

@@ -5,59 +5,10 @@ namespace AdventOfCode2016\Day11;
 use InvalidArgumentException;
 use Kieranajp\Combinator\Combinator;
 
-class Arrangement
+class ArrangementManager
 {
     const MIN_FLOOR = 0;
     const MAX_FLOOR = 3;
-
-    /**
-     * The elevator floor.
-     * @var int
-     */
-    protected $elevatorFloor;
-
-    /**
-     * The objects representations. The generators floors are represented by the
-     * odd indexes of the array and the microchips floors by the even indexes.
-     * @var array
-     */
-    protected $objects;
-
-    public function __construct(
-        int $elevatorFloor = null,
-        array $objects = null
-    ) {
-        $constructed = false;
-
-        if ($elevatorFloor !== null &&
-            $objects &&
-            !$this->set($elevatorFloor, $objects)
-        ) {
-                throw new InvalidArgumentException('Invalid arguments.');
-        }
-    }
-
-    /**
-     * Set the elevator floor and object configuration.
-     *
-     * @param  int   $elevatorFloor The elevator floor.
-     * @param  array $objects       The object configuration.
-     * @return bool                 Whether the params are valid and were set.
-     */
-    public function set(int $elevatorFloor, array $objects) : bool
-    {
-        if ($this->isPossible($objects) &&
-            $elevatorFloor >= self::MIN_FLOOR &&
-            $elevatorFloor <= self::MAX_FLOOR
-        ) {
-            $this->elevatorFloor = $elevatorFloor;
-            $this->objects = $objects;
-
-            return true;
-        }
-
-        return false;
-    }
 
     /**
      * Checks if a given object configuration is possible. A configuration is
@@ -94,11 +45,8 @@ class Arrangement
      * @param  ?array $objects The objects configuration.
      * @return bool            [description]
      */
-    protected function floorHasGenerators(
-        int $floor,
-        ?array $objects = null
-    ) : bool {
-        $objects = $objects ?? $this->objects;
+    protected function floorHasGenerators(int $floor, array $objects) : bool
+    {
         $nObjects = count($objects);
 
         for ($i = 0; $i < $nObjects; $i += 2) {
@@ -115,15 +63,18 @@ class Arrangement
      *
      * @return array The next possible arrangements.
      */
-    public function nextPossibleArrangements() : array
+    public function nextPossibleArrangements(array $arrangement) : array
     {
         $nextArrangements = [];
         $nextPossibleMinFloor = self::MIN_FLOOR;
 
         // Get the objects on the same floor as the elevator.
-        $objsCurrentFloor = array_filter($this->objects, function ($floor) {
-            return $this->elevatorFloor === $floor;
-        });
+        $objsCurrentFloor = array_filter(
+            $arrangement['objects'],
+            function ($floor) use ($arrangement) {
+                return $arrangement['elevator'] === $floor;
+            }
+        );
 
         // Get the combinations in wich the objects can be moved.
         $possibleCombinations = [];
@@ -148,10 +99,10 @@ class Arrangement
             // If the elevator is above the bottom floor and above the first
             // floor that contains a object (there is no point of going
             // below that), then it can go down.
-            if ($this->elevatorFloor > self::MIN_FLOOR &&
-                $this->elevatorFloor > $this->minOccupiedFloor()
+            if ($arrangement['elevator'] > self::MIN_FLOOR &&
+                $arrangement['elevator'] > $this->minOccupiedFloor($arrangement['objects'])
             ) {
-                $down = $this->objects;
+                $down = $arrangement['objects'];
 
                 foreach ($objectsToMove as $object) {
                     $down[$object]--;
@@ -162,16 +113,16 @@ class Arrangement
                         min($down),
                         $nextPossibleMinFloor
                     );
-                    $nextArrangements[] = new Arrangement(
-                        $this->elevatorFloor - 1,
-                        $down
-                    );
+                    $nextArrangements[] = [
+                        'elevator' => $arrangement['elevator'] - 1,
+                        'objects' => $down
+                    ];
                 }
             }
 
             // If the elevator is below the top floor, then it can go up.
-            if ($this->elevatorFloor < self::MAX_FLOOR) {
-                $up = $this->objects;
+            if ($arrangement['elevator'] < self::MAX_FLOOR) {
+                $up = $arrangement['objects'];
 
                 foreach ($objectsToMove as $object) {
                     $up[$object]++;
@@ -182,10 +133,10 @@ class Arrangement
                         min($up),
                         $nextPossibleMinFloor
                     );
-                    $nextArrangements[] = new Arrangement(
-                        $this->elevatorFloor + 1,
-                        $up
-                    );
+                    $nextArrangements[] = [
+                        'elevator' => $arrangement['elevator'] + 1,
+                        'objects' => $up
+                    ];
                 }
             }
         }
@@ -195,7 +146,7 @@ class Arrangement
         $nextArrangements = array_filter(
             $nextArrangements,
             function ($arr) use ($nextPossibleMinFloor) {
-                return $arr->minOccupiedFloor() >= $nextPossibleMinFloor;
+                return $this->minOccupiedFloor($arr['objects']) >= $nextPossibleMinFloor;
             }
         );
 
@@ -207,59 +158,9 @@ class Arrangement
      *
      * @return int The lowest floor that contains any object.
      */
-    public function minOccupiedFloor() : int
+    public function minOccupiedFloor(array $objects) : int
     {
-        return $this->objects ? min($this->objects) : self::MIN_FLOOR;
-    }
-
-    /**
-     * Return a string representation of the current arrangement.
-     *
-     * @return string The string representation of the current arrangement.
-     */
-    public function __toString() : string
-    {
-        $string = "[E: " . $this->elevatorFloor . "]";
-
-        foreach ($this->objects as $value) {
-            $string .= " " . $value;
-        }
-
-        return $string;
-    }
-
-    /**
-     * Compares the current arrangement with the given arrangement.
-     *
-     * @param  Arrangement $arrangement The arrangement to compare with.
-     * @return bool                     Whether if the arrangements are equal.
-     */
-    public function isEqual(Arrangement $arrangement) : bool
-    {
-        $equalObjects = $this->objects == $arrangement->getObjects();
-
-        return $this->elevatorFloor === $arrangement->getElevatorFloor() &&
-               $equalObjects;
-    }
-
-    /**
-     * Get the objects.
-     *
-     * @return array The objects.
-     */
-    public function getObjects() : array
-    {
-        return $this->objects;
-    }
-
-    /**
-     * Get the elevator floor.
-     *
-     * @return int The elevator floor.
-     */
-    public function getElevatorFloor() : int
-    {
-        return $this->elevatorFloor;
+        return min($objects);
     }
 
     /**
@@ -267,9 +168,9 @@ class Arrangement
      *
      * @return bool Whether the objects are all on the top floor.
      */
-    public function allObjectsOnTopFloor() : bool
+    public function allObjectsOnTopFloor(array $arrangement) : bool
     {
-        foreach ($this->objects as $floor) {
+        foreach ($arrangement['objects'] as $floor) {
             if ($floor !== self::MAX_FLOOR) {
                 return false;
             }

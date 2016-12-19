@@ -18,21 +18,25 @@ class Day11Command extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $initialArrangement = ['elevator' => 0, 'objects' => [0, 0, 1, 2, 1, 2, 1, 2, 1, 2]];
+        $output->writeln("Input: " . implode(" ", $initialArrangement['objects']));
+
         $start = microtime(true);
-        $elevatorFloor = 0;
-        $objects = [0, 0, 1, 2, 1, 2, 1, 2, 1, 2];
-        $steps = new Steps($elevatorFloor, $objects);
-        $moves = $steps->move();
+        $steps = new Steps();
+        $moves = $steps->move($initialArrangement);
         $end = microtime(true);
+
         $output->writeln("<info>Moves 1: $moves (in " . round($end - $start, 2) ."s)</info>");
 
-        ini_set('memory_limit', '2000M');
+        ini_set('memory_limit', '2000M'); // Yes, its hacky. Need to optimize later.
+        $initialArrangement = ['elevator' => 0, 'objects' => [0, 0, 1, 2, 1, 2, 1, 2, 1, 2, 0, 0, 0, 0]];
+        $output->writeln("Input: " . implode(" ", $initialArrangement['objects']));
+
         $start = microtime(true);
-        $elevatorFloor = 0;
-        $objects = [0, 0, 1, 2, 1, 2, 1, 2, 1, 2, 0, 0, 0, 0];
-        $steps = new Steps($elevatorFloor, $objects);
-        $moves = $steps->move();
+        $steps = new Steps();
+        $moves = $steps->move($initialArrangement);
         $end = microtime(true);
+
         $output->writeln("<info>Moves 2: $moves (in " . round($end - $start, 2) ."s)</info>");
     }
 }
