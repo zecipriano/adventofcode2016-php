@@ -40,22 +40,24 @@ class FloorLayout
      * Returns the minimum number of steps needed to go from the starting
      * coordinate to the ending coordinate.
      * .
-     * @param  array    $startCoordindate The starting coordinate.
+     * @param  array    $startCoordinate The starting coordinate.
      * @param  array    $endCoordinate    The ending coordinate.
      * @return int|null                   The number of steps (or null if not
      *                                    reachable).
      */
     public function shortestPath(
-        array $startCoordindate,
+        array $startCoordinate,
         array $endCoordinate
     ) : ?int {
         $pathLenght = 0;
-        $currentCoordinates[] = $startCoordindate;
+        $currentCoordinates[] = $startCoordinate;
+        $this->visited = null;
+        $this->visited[$startCoordinate[0]][$startCoordinate[1]] = 1;
 
         $endX = $endCoordinate[0];
         $endY = $endCoordinate[1];
 
-        if ($endCoordinate == $startCoordindate) {
+        if ($endCoordinate == $startCoordinate) {
             return $pathLenght;
         }
 
@@ -64,7 +66,10 @@ class FloorLayout
             $nextCoordinates = [];
 
             foreach ($currentCoordinates as $coordinate) {
-                $nextCoordinates = array_merge($nextCoordinates, $this->expand($coordinate));
+                $nextCoordinates = array_merge(
+                    $nextCoordinates,
+                    $this->expand($coordinate)
+                );
             }
 
             foreach ($nextCoordinates as $coordinate) {
@@ -82,6 +87,44 @@ class FloorLayout
 
             $currentCoordinates = $nextCoordinates;
         }
+    }
+
+    /**
+     * Sees how many coordinates can be reached in $steps steps.
+     *
+     * @param  array $startCoordinate The starting coordinate.
+     * @param  int   $steps           The number of steps to go.
+     * @return int                    The amount of reachable coordinates.
+     */
+    public function reachableCoordinates(
+        array $startCoordinate,
+        int $steps
+    ) : int {
+        $this->visited = null;
+
+        $currentCoordinates[] = $startCoordinate;
+        $this->visited[$startCoordinate[0]][$startCoordinate[1]] = 1;
+
+        for ($i = 1; $i <= $steps; $i++) {
+            $nextCoordinates = [];
+
+            foreach ($currentCoordinates as $coordinate) {
+                $nextCoordinates = array_merge(
+                    $nextCoordinates,
+                    $this->expand($coordinate)
+                );
+            }
+
+            $currentCoordinates = $nextCoordinates;
+        }
+
+        $sum = 0;
+
+        foreach ($this->visited as $y) {
+            $sum += count($y);
+        }
+
+        return $sum;
     }
 
     /**

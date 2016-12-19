@@ -27,7 +27,9 @@ class Day13Command extends Command
 
         $layout = new FloorLayout($seed);
         $steps = $layout->shortestPath([1, 1], [31, 39]);
+        $reach = $layout->reachableCoordinates([1,1], 50);
 
-        $output->writeln("<info>Steps to reach [31, 39]: $steps</info>");
+        $output->writeln("Steps to reach [31, 39]: <info>$steps</info>");
+        $output->writeln("Coordinates reachable in 50 steps: <info>$reach</info>");
     }
 }
