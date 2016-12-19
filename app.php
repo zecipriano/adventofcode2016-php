@@ -16,6 +16,7 @@ use AdventOfCode2016\Day09\Day09Command;
 use AdventOfCode2016\Day10\Day10Command;
 use AdventOfCode2016\Day11\Day11Command;
 use AdventOfCode2016\Day12\Day12Command;
+use AdventOfCode2016\Day13\Day13Command;
 
 $application = new Application();
 
@@ -32,5 +33,6 @@ $application->add(new Day09Command());
 $application->add(new Day10Command());
 $application->add(new Day11Command());
 $application->add(new Day12Command());
+$application->add(new Day13Command());
 
 $application->run();
