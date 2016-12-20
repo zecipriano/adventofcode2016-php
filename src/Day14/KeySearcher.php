@@ -6,7 +6,7 @@ class KeySearcher
 {
     const OLD = 1000;
 
-    public function searchKeys(string $salt, int $nKeys) : int
+    public function searchKeys(string $salt, int $nKeys, int $additionalHashes = 0) : int
     {
         $validatedKeys = [];
         $waitingValidation = [];
@@ -14,7 +14,7 @@ class KeySearcher
 
         while (true) {
             // Hash
-            $hash = md5($salt . $index);
+            $hash = $this->getHash($salt . $index, $additionalHashes);
 
             // Check if it is a possible validation key.
             $valChar = $this->isPossibleKeyValidation($hash);
@@ -86,5 +86,16 @@ class KeySearcher
         }
 
         return null;
+    }
+
+    public function getHash(string $string, int $additionalHashes = 0) : string
+    {
+        $hash = md5($string);
+
+        for ($i = 0; $i < $additionalHashes; $i++) {
+            $hash = md5($hash);
+        }
+
+        return $hash;
     }
 }

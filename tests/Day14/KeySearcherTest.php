@@ -38,6 +38,23 @@ class KeySearcherTest extends TestCase
         );
     }
 
+    public function testItStretchesHashes()
+    {
+        $searcher = new KeySearcher();
+        $this->assertEquals(
+            'a107ff634856bb300138cac6568c0f24',
+            $searcher->getHash('abc0', 2016)
+        );
+    }
+
+    public function testItSearchesKeysWithHashStretching()
+    {
+        $searcher = new KeySearcher();
+        $lastKeyIndex = $searcher->searchKeys('abc', 64, 2016);
+
+        $this->assertEquals(22551, $lastKeyIndex);
+    }
+
     public function possibleKeysProvider()
     {
         return [

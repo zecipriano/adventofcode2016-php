@@ -27,7 +27,9 @@ class Day14Command extends Command
 
         $searcher = new KeySearcher();
         $keyIndex = $searcher->searchKeys($salt, 64);
+        $keyIndexStretch = $searcher->searchKeys($salt, 64, 2016);
 
         $output->writeln("64th key index: <info>$keyIndex</info>");
+        $output->writeln("64th key index (with stretching): <info>$keyIndexStretch</info>");
     }
 }
