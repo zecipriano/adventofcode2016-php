@@ -20,20 +20,39 @@ class Day15Command extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $start = microtime(true);
         $discConfig = [
             1 => ['nPositions' => 17, 'position' => 5],
             2 => ['nPositions' => 19, 'position' => 8],
             3 => ['nPositions' => 7,  'position' => 1],
             4 => ['nPositions' => 13, 'position' => 7],
             5 => ['nPositions' => 5,  'position' => 1],
-            6 => ['nPositions' => 5,  'position' => 0],
+            6 => ['nPositions' => 3,  'position' => 0],
         ];
 
         $discSet = new DiscSet($discConfig);
         $ballDropper = new BallDropper($discSet);
-
         $firstBall = $ballDropper->dropBalls();
+        $end = microtime(true);
+        $output->writeln("First ball to drop 1: <info>$firstBall</info> (in " .
+                         round($end - $start, 2) ."s)");
 
-        $output->writeln("First ball to drop: <info>$firstBall</info>");
+        $start = microtime(true);
+        $discConfig = [
+            1 => ['nPositions' => 17, 'position' => 5],
+            2 => ['nPositions' => 19, 'position' => 8],
+            3 => ['nPositions' => 7,  'position' => 1],
+            4 => ['nPositions' => 13, 'position' => 7],
+            5 => ['nPositions' => 5,  'position' => 1],
+            6 => ['nPositions' => 3,  'position' => 0],
+            7 => ['nPositions' => 11, 'position' => 0],
+        ];
+
+        $discSet = new DiscSet($discConfig);
+        $ballDropper = new BallDropper($discSet);
+        $firstBall = $ballDropper->dropBalls();
+        $end = microtime(true);
+        $output->writeln("First ball to drop 2: <info>$firstBall</info> (in " .
+                         round($end - $start, 2) ."s)");
     }
 }
