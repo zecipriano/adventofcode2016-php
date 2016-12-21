@@ -31,8 +31,7 @@ class Day15Command extends Command
         ];
 
         $discSet = new DiscSet($discConfig);
-        $ballDropper = new BallDropper($discSet);
-        $firstBall = $ballDropper->dropBalls();
+        $firstBall = $discSet->findDropTime();
         $end = microtime(true);
         $output->writeln("First ball to drop 1: <info>$firstBall</info> (in " .
                          round($end - $start, 2) ."s)");
@@ -49,8 +48,7 @@ class Day15Command extends Command
         ];
 
         $discSet = new DiscSet($discConfig);
-        $ballDropper = new BallDropper($discSet);
-        $firstBall = $ballDropper->dropBalls();
+        $firstBall = $discSet->findDropTime();
         $end = microtime(true);
         $output->writeln("First ball to drop 2: <info>$firstBall</info> (in " .
                          round($end - $start, 2) ."s)");

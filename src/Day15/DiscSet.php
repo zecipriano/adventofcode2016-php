@@ -49,4 +49,59 @@ class DiscSet
     {
         return count($this->discSet);
     }
+
+    /**
+     * Find the time to drop the ball.
+     *
+     * @return int The time to drop the ball.
+     */
+    public function findDropTime() : int
+    {
+        $needed = $this->getNeededDiscPosition();
+        $tick = 0;
+
+        while (true) {
+            if ($this->isAtNeededPosition($needed)) {
+                return $tick;
+            }
+
+            $tick++;
+            $this->tick();
+        }
+
+        return 1;
+    }
+
+    /**
+     * Calculate the position in which each of the discs should be at the time
+     * of the ball dropping in order to it drop successfully through the discs.
+     *
+     * @return array The positions of each disc.
+     */
+    protected function getNeededDiscPosition() : array
+    {
+        foreach ($this->discSet as $id => $disc) {
+            $needed[$id] = ($disc['nPositions'] - 1) -
+                           (($id - 1) % $disc['nPositions']);
+        }
+
+        return $needed;
+    }
+
+    /**
+     * Compare the current disc positions with the needed position.
+     *
+     * @param  array $needed The needed position.
+     * @return bool          Whether the discs are in the needed position.
+     */
+    protected function isAtNeededPosition(array $needed) : bool
+    {
+        foreach ($this->discSet as $id => $disc) {
+            if ($this->discSet[$id]['position'] !== $needed[$id]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

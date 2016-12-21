@@ -45,4 +45,16 @@ class DiscSetTest extends TestCase
         $this->discSet->tick(); // t7 -> ball reaches second disc
         $this->assertEquals(0, $this->discSet->getDiscPosition(2));
     }
+
+    public function testFirstBallToPass()
+    {
+        $config = [
+            1 => ['nPositions' => 5, 'position' => 4],
+            2 => ['nPositions' => 2, 'position' => 1],
+        ];
+
+        $discSet = new DiscSet($config);
+        $dropTime = $discSet->findDropTime();
+        $this->assertEquals(5, $dropTime);
+    }
 }
