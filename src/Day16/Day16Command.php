@@ -25,7 +25,6 @@ class Day16Command extends Command
     {
         $initialState =  $input->getArgument('input');
 
-        ini_set('memory_limit', '4000M');
         $data = new Data();
 
         $start = microtime(true);

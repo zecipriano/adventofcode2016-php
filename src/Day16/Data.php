@@ -42,19 +42,18 @@ class Data
      */
     public function doubleData(string $inString) : string
     {
-        $a = $inString;
-        $b = array_reverse(str_split($inString));
+        $out = "0";
+        $len = strlen($inString);
 
-        foreach ($b as $i => $value) {
-            if (strcmp($value, '1') == 0) {
-                $b[$i] = '0';
+        for ($i = $len - 1; $i >= 0; $i--) {
+            if (strcmp($inString[$i], '1') == 0) {
+                $out .= '0';
             } else {
-                $b[$i] = '1';
+                $out .= '1';
             }
         }
 
-        $outString = $a . '0' . implode($b);
-        return $outString;
+        return $inString . $out;
     }
 
 
@@ -70,7 +69,8 @@ class Data
 
         while (strlen($checksum) % 2 == 0) {
             $checksum = '';
-            for ($i = 0; $i < strlen($string); $i +=2) {
+            $len = strlen($string);
+            for ($i = 0; $i < $len; $i +=2) {
                 if (strcmp($string[$i], $string[$i + 1]) == 0) {
                     $checksum .= '1';
                 } else {
