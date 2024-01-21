@@ -25,8 +25,10 @@ class ArrangementManager
             // If the corresponding generator is in a different floor (meaning:
             // the microchip is disconnected).
             // Check if the current floor has generators.
-            if (($objects[$i] !== $objects[$i - 1])
-                && $this->floorHasGenerators($objects[$i], $objects)) {
+            if (
+                ($objects[$i] !== $objects[$i - 1])
+                && $this->floorHasGenerators($objects[$i], $objects)
+            ) {
                 return false;
             }
         }
@@ -95,7 +97,8 @@ class ArrangementManager
             // If the elevator is above the bottom floor and above the first
             // floor that contains a object (there is no point of going
             // below that), then it can go down.
-            if ($arrangement['elevator'] > self::MIN_FLOOR &&
+            if (
+                $arrangement['elevator'] > self::MIN_FLOOR &&
                 $arrangement['elevator'] > $this->minOccupiedFloor($arrangement['objects'])
             ) {
                 $down = $arrangement['objects'];

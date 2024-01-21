@@ -19,8 +19,10 @@ class Display
      */
     public function rect(int $height, int $width): void
     {
-        if ($height > count($this->display) ||
-            $width > count($this->display[0])) {
+        if (
+            $height > count($this->display) ||
+            $width > count($this->display[0])
+        ) {
             return;
         }
 

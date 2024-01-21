@@ -135,8 +135,10 @@ class Retriever
 
                 $this->visitedPositions[$x][$y]++;
 
-                if (! $this->firstVisitedTwicePosition &&
-                    $this->visitedPositions[$x][$y] === 2) {
+                if (
+                    ! $this->firstVisitedTwicePosition &&
+                    $this->visitedPositions[$x][$y] === 2
+                ) {
                     $this->firstVisitedTwicePosition = [$x, $y];
                 }
             }

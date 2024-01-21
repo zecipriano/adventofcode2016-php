@@ -12,7 +12,7 @@ class DisplayOperationParserTest extends TestCase
      */
     public function testItParsesTheOperation(string $string, array $expected): void
     {
-        $parser = new DisplayOperationParser;
+        $parser = new DisplayOperationParser();
         $this->assertEquals($expected, $parser->parse($string));
     }
 

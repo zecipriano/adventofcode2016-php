@@ -3,7 +3,6 @@
 namespace Tests\Day11;
 
 use PHPUnit\Framework\TestCase;
-
 use AdventOfCode2016\Day11\Steps;
 
 class StepsTest extends TestCase

@@ -89,7 +89,7 @@ class MessageCorrector
         array &$charCounts
     ): void {
         $iMax = strlen($message);
-        for ($i = 0;  $i < $iMax; $i++) {
+        for ($i = 0; $i < $iMax; $i++) {
             $this->initialize($i, $message[$i], $charCounts);
             $charCounts[$i][$message[$i]] += 1;
         }

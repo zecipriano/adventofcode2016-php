@@ -52,8 +52,10 @@ class Bot implements Receiver
 
         // If has two values triggers the distribution.
         if (count($this->values) === 2) {
-            if (min($this->values) === self::LOW &&
-                max($this->values) === self::HIGH) {
+            if (
+                min($this->values) === self::LOW &&
+                max($this->values) === self::HIGH
+            ) {
                 echo $this->describe() . "\n";
             }
 

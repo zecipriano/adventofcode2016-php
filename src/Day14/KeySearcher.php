@@ -18,9 +18,11 @@ class KeySearcher
 
             // Check if it is a possible validation key.
             $valChar = $this->isPossibleKeyValidation($hash);
-            if ($valChar !== null &&
+            if (
+                $valChar !== null &&
                 isset($waitingValidation[$valChar]) &&
-                count($waitingValidation[$valChar]) > 0) {
+                count($waitingValidation[$valChar]) > 0
+            ) {
                 foreach ($waitingValidation[$valChar] as $key) {
                     $validatedKeys[$key[1]] = $key[0];
                 }
@@ -44,8 +46,10 @@ class KeySearcher
             // Check if we reached the end and, if so, return.
             asort($validatedKeys);
 
-            if (count($validatedKeys) > $nKeys &&
-                $index > max(array_slice($validatedKeys, 0, $nKeys)) + self::OLD) {
+            if (
+                count($validatedKeys) > $nKeys &&
+                $index > max(array_slice($validatedKeys, 0, $nKeys)) + self::OLD
+            ) {
                 $array = array_slice($validatedKeys, $nKeys - 1, 1);
                 return current($array);
             }
