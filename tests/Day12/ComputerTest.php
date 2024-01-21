@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Day12;
+namespace Tests\Day12;
 
 use PHPUnit\Framework\TestCase;
 use AdventOfCode2016\Day12\Computer;

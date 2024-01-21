@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Day11;
+namespace Tests\Day11;
 
 use AdventOfCode2016\Day11\ArrangementManager;
 use PHPUnit\Framework\TestCase;

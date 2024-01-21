@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Day14;
+namespace Tests\Day14;
 
 use AdventOfCode2016\Day14\KeySearcher;
 use PHPUnit\Framework\TestCase;

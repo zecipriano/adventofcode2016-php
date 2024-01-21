@@ -1,6 +1,6 @@
 <?php
 
-namespace tests;
+namespace Tests\Day07;
 
 use PHPUnit\Framework\TestCase;
 use AdventOfCode2016\Day07\IPChecker;

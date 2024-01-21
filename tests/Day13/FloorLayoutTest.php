@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Day13;
+namespace Tests\Day13;
 
 use PHPUnit\Framework\TestCase;
 use AdventOfCode2016\Day13\FloorLayout;

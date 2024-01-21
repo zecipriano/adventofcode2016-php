@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Day10;
+namespace Tests\Day10;
 
 use PHPUnit\Framework\TestCase;
 use AdventOfCode2016\Day10\InstructionParser;

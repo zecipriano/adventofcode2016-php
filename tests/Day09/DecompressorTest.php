@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Day09;
+namespace Tests\Day09;
 
 use PHPUnit\Framework\TestCase;
 use AdventOfCode2016\Day09\Decompressor;

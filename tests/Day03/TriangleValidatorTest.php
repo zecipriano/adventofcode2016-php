@@ -1,6 +1,6 @@
 <?php
 
-namespace tests;
+namespace Tests\Day03;
 
 use PHPUnit\Framework\TestCase;
 use AdventOfCode2016\Day03\TriangleValidator;

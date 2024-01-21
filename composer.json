@@ -18,6 +18,11 @@
     "autoload": {
         "psr-4": {
             "AdventOfCode2016\\": "src/"
+        },
+        "autoload-dev": {
+            "psr-4": {
+                "Tests\\": "tests/"
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace tests;
+namespace Tests\Day05;
 
 use PHPUnit\Framework\TestCase;
 use AdventOfCode2016\Day05\PasswordGenerator;

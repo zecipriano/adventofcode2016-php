@@ -1,6 +1,6 @@
 <?php
 
-namespace tests;
+namespace Tests\Day06;
 
 use PHPUnit\Framework\TestCase;
 use AdventOfCode2016\Day06\MessageCorrector;
