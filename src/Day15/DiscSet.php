@@ -4,7 +4,7 @@ namespace AdventOfCode2016\Day15;
 
 class DiscSet
 {
-    protected $discSet;
+    protected array $discSet;
 
     public function __construct(array $discSet)
     {
@@ -14,22 +14,19 @@ class DiscSet
     /**
      * Get the position of the given disc.
      *
-     * @param  int $discID The disc to get the position.
+     * @param int $discID The disc to get the position.
+     *
      * @return int         The disc position.
      */
-    public function getDiscPosition(int $discID) : int
+    public function getDiscPosition(int $discID): int
     {
-        if (!isset($this->discSet[$discID]['position'])) {
-            return -1;
-        }
-
-        return $this->discSet[$discID]['position'];
+        return $this->discSet[$discID]['position'] ?? -1;
     }
 
     /**
      * Move all discs one position.
      */
-    public function tick() : void
+    public function tick(): void
     {
         foreach ($this->discSet as &$disc) {
             $disc['position']++;
@@ -45,7 +42,7 @@ class DiscSet
      *
      * @return int The number of levels in the disc set.
      */
-    public function getLevelsN() : int
+    public function getLevelsN(): int
     {
         return count($this->discSet);
     }
@@ -55,7 +52,7 @@ class DiscSet
      *
      * @return int The time to drop the ball.
      */
-    public function findDropTime() : int
+    public function findDropTime(): int
     {
         $needed = $this->getNeededDiscPosition();
         $tick = 0;
@@ -68,8 +65,6 @@ class DiscSet
             $tick++;
             $this->tick();
         }
-
-        return 1;
     }
 
     /**
@@ -78,11 +73,13 @@ class DiscSet
      *
      * @return array The positions of each disc.
      */
-    protected function getNeededDiscPosition() : array
+    protected function getNeededDiscPosition(): array
     {
+        $needed = [];
+
         foreach ($this->discSet as $id => $disc) {
             $needed[$id] = ($disc['nPositions'] - 1) -
-                           (($id - 1) % $disc['nPositions']);
+                (($id - 1) % $disc['nPositions']);
         }
 
         return $needed;
@@ -91,10 +88,11 @@ class DiscSet
     /**
      * Compare the current disc positions with the needed position.
      *
-     * @param  array $needed The needed position.
+     * @param array $needed The needed position.
+     *
      * @return bool          Whether the discs are in the needed position.
      */
-    protected function isAtNeededPosition(array $needed) : bool
+    protected function isAtNeededPosition(array $needed): bool
     {
         foreach ($this->discSet as $id => $disc) {
             if ($this->discSet[$id]['position'] !== $needed[$id]) {

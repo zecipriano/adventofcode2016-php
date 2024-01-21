@@ -2,8 +2,8 @@
 
 namespace AdventOfCode2016\Day03;
 
-use AdventOfCode2016\Day03\TriangleValidator;
 use AdventOfCode2016\Utils\FileReader;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Day03Command extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('day03')
             ->setDescription('Day 03: Squares With Three Sides')
@@ -25,8 +25,8 @@ class Day03Command extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $file =  new FileReader($input->getArgument('input'));
-        } catch (\Exception $e) {
+            $file = new FileReader($input->getArgument('input'));
+        } catch (Exception) {
             $output->writeln("<error>Can\'t read the file.</error>");
             return Command::FAILURE;
         }
@@ -40,14 +40,14 @@ class Day03Command extends Command
 
         foreach ($lines as $triangleSides) {
             // Triangle defined in a line.
-            $side1 = intval(strtok($triangleSides, " "));
-            $side2 = intval(strtok(" "));
-            $side3 = intval(strtok(" "));
+            $side1 = (int) strtok($triangleSides, " ");
+            $side2 = (int) strtok(" ");
+            $side3 = (int) strtok(" ");
 
             // Triangles defined in columns.
-            array_push($columnTriangles[0], $side1);
-            array_push($columnTriangles[1], $side2);
-            array_push($columnTriangles[2], $side3);
+            $columnTriangles[0][] = $side1;
+            $columnTriangles[1][] = $side2;
+            $columnTriangles[2][] = $side3;
 
             // Validate the triangle defined in a line.
             if ($validator->validate($side1, $side2, $side3)) {
@@ -72,10 +72,10 @@ class Day03Command extends Command
         }
 
         $output->writeln("<info>There are $validTriangles valid triangles." .
-                         "</info>");
+            "</info>");
 
         $output->writeln("<info>If defined in columns, there are " .
-                         "$validColumnTriangles valid triangles.</info>");
+            "$validColumnTriangles valid triangles.</info>");
 
         return Command::SUCCESS;
     }

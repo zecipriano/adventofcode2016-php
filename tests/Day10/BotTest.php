@@ -8,7 +8,7 @@ use AdventOfCode2016\Day10\Output;
 
 class BotTest extends TestCase
 {
-    public function testBots()
+    public function testBots(): void
     {
         $bot0 = new Bot();
         $bot1 = new Bot();

@@ -10,7 +10,7 @@ class InstructionsParserTest extends TestCase
     /**
      * @dataProvider instructionsProvider
      */
-    public function testItParsesIntructions(string $string, array $expected)
+    public function testItParsesIntructions(string $string, array $expected): void
     {
         $parser = new InstructionParser();
         $parsed = $parser->parse($string);
@@ -18,7 +18,7 @@ class InstructionsParserTest extends TestCase
         $this->assertEquals($expected, $parsed);
     }
 
-    public static function instructionsProvider()
+    public static function instructionsProvider(): array
     {
         return [
             [

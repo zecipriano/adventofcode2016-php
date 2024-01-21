@@ -7,14 +7,14 @@ use AdventOfCode2016\Day04\Room;
 
 class RoomTest extends TestCase
 {
-    protected $room;
+    protected Room $room;
 
     protected function setUp(): void
     {
         $this->room = new Room();
     }
 
-    public function testItCalculatesChecksum()
+    public function testItCalculatesChecksum(): void
     {
         $checksum = $this->room->calcChecksum('aaaaa-bbb-z-y-x');
         $this->assertEquals('abxyz', $checksum);
@@ -26,7 +26,7 @@ class RoomTest extends TestCase
         $this->assertEquals('oarel', $checksum);
     }
 
-    public function testItValidatesChecksum()
+    public function testItValidatesChecksum(): void
     {
         $this->assertTrue($this->room->valChecksum('aaaaa-bbb-z-y-x', 'abxyz'));
         $this->assertTrue($this->room->valChecksum('a-b-c-d-e-f-g-h', 'abcde'));

@@ -7,7 +7,7 @@ use AdventOfCode2016\Day12\Computer;
 
 class ComputerTest extends TestCase
 {
-    public function testItExecuteInstructions()
+    public function testItExecuteInstructions(): void
     {
         $computer = new Computer();
 
@@ -24,7 +24,7 @@ class ComputerTest extends TestCase
         $this->assertEquals(42, $computer->getRegisterValue('a'));
     }
 
-    public function testItExecuteInstructionSet()
+    public function testItExecuteInstructionSet(): void
     {
         $computer = new Computer();
         $instructionSet = [

@@ -8,7 +8,7 @@ use AdventOfCode2016\Day02\AlternativeKeypad;
 
 class KeypadTest extends TestCase
 {
-    public function testNormalKeypad()
+    public function testNormalKeypad(): void
     {
         $keypad = new NormalKeypad();
         $keypad->moveCurrentButton('U');
@@ -42,7 +42,7 @@ class KeypadTest extends TestCase
         $this->assertEquals('5', $keypad->getCurrentButton());
     }
 
-    public function testAlternativeKeypad()
+    public function testAlternativeKeypad(): void
     {
         $keypad = new AlternativeKeypad();
         $keypad->moveCurrentButton('U');

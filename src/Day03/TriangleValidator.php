@@ -9,13 +9,13 @@ class TriangleValidator
      * valid triangle, the sum of any two sides must be larger than the
      * remaining side.
      *
-     * @param  int  $side1 Side 1 size.
-     * @param  int  $side2 Side 2 size.
-     * @param  int  $side3 Side 3 size.
+     * @param int $side1 Side 1 size.
+     * @param int $side2 Side 2 size.
+     * @param int $side3 Side 3 size.
      *
      * @return bool        Whether the sides belong to valid triangle.
      */
-    public function validate(int $side1, int $side2, int $side3) : bool
+    public function validate(int $side1, int $side2, int $side3): bool
     {
         $check1 = $side1 + $side2 > $side3;
         $check2 = $side1 + $side3 > $side2;

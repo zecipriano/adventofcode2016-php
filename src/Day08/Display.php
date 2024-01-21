@@ -4,7 +4,7 @@ namespace AdventOfCode2016\Day08;
 
 class Display
 {
-    protected $display;
+    protected array $display;
 
     public function __construct(int $height, int $width)
     {
@@ -15,9 +15,9 @@ class Display
      * Turns on a rectangle of lights in the top left corner.
      *
      * @param int $height The height of the rectangle.
-     * @param int $width  The width of the rectangle.
+     * @param int $width The width of the rectangle.
      */
-    public function rect(int $height, int $width) : void
+    public function rect(int $height, int $width): void
     {
         if ($height > count($this->display) ||
             $width > count($this->display[0])) {
@@ -37,15 +37,17 @@ class Display
      * @param int $column The column to rotate.
      * @param int $amount The amount to rotate.
      */
-    public function rotateColumn(int $column, int $amount) : void
+    public function rotateColumn(int $column, int $amount): void
     {
         // Get the column to rotate
         $tmpColumn = array_column($this->display, $column);
 
         $this->rotateArray($tmpColumn, $amount);
 
+        $iMax = count($tmpColumn);
+
         // Set the column back in the display
-        for ($i = 0; $i < count($tmpColumn); $i++) {
+        for ($i = 0; $i < $iMax; $i++) {
             $this->display[$i][$column] = $tmpColumn[$i];
         }
     }
@@ -53,10 +55,10 @@ class Display
     /**
      * Rotate a row by the given $amount.
      *
-     * @param int $row    The row to rotate.
+     * @param int $row The row to rotate.
      * @param int $amount The amount to rotate.
      */
-    public function rotateRow(int $row, int $amount) : void
+    public function rotateRow(int $row, int $amount): void
     {
         $this->rotateArray($this->display[$row], $amount);
     }
@@ -67,7 +69,7 @@ class Display
      * @param int $y The y coordinate.
      * @param int $x The x coordinate.
      */
-    protected function turnOn(int $y, int $x) : void
+    protected function turnOn(int $y, int $x): void
     {
         if ($y > count($this->display) || $x > count($this->display[0])) {
             return;
@@ -79,10 +81,10 @@ class Display
     /**
      * Rotate an array by the given amount.
      *
-     * @param array $array  The array to rotate.
-     * @param int   $amount The amount to rotate.
+     * @param array $array The array to rotate.
+     * @param int $amount The amount to rotate.
      */
-    protected function rotateArray(array &$array, int $amount) : void
+    protected function rotateArray(array &$array, int $amount): void
     {
         for ($i = 0; $i < $amount; $i++) {
             $el = array_pop($array);
@@ -95,7 +97,7 @@ class Display
      *
      * @return int The total of pixels.
      */
-    public function totalPixels() : int
+    public function totalPixels(): int
     {
         return count($this->display) * count($this->display[0]);
     }
@@ -105,13 +107,13 @@ class Display
      *
      * @return int The number of lit pixels.
      */
-    public function litPixels() : int
+    public function litPixels(): int
     {
         $litPixels = 0;
 
         array_walk_recursive(
             $this->display,
-            function ($pixel) use (&$litPixels) {
+            static function ($pixel) use (&$litPixels) {
                 $litPixels += $pixel;
             }
         );
@@ -122,19 +124,20 @@ class Display
     /**
      * Checks if a given pixel is lit.
      *
-     * @param  int  $y The y coordinate of the pixel.
-     * @param  int  $x The x coordinate of the pixel.
+     * @param int $y The y coordinate of the pixel.
+     * @param int $x The x coordinate of the pixel.
+     *
      * @return bool    Whether the pixel is list or not.
      */
-    public function isLit(int $y, int $x) : bool
+    public function isLit(int $y, int $x): bool
     {
-        return boolval($this->display[$y][$x]);
+        return (bool) $this->display[$y][$x];
     }
 
     /**
      * Echoes the display.
      */
-    public function showDisplay() : void
+    public function showDisplay(): void
     {
         echo "\n--- DISPLAY ---\n\n";
 
@@ -153,7 +156,7 @@ class Display
      *
      * @return array The display.
      */
-    public function getDisplay() : array
+    public function getDisplay(): array
     {
         return $this->display;
     }

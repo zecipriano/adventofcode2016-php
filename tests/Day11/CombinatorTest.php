@@ -7,14 +7,14 @@ use PHPUnit\Framework\TestCase;
 
 class CombinatorTest extends TestCase
 {
-    public function testInstantiation()
+    public function testInstantiation(): void
     {
         $c = new Combinator([1, 2, 3, 4, 5]);
 
         $this->assertInstanceOf(Combinator::class, $c);
     }
 
-    public function testCountCombinationsOf5x3()
+    public function testCountCombinationsOf5x3(): void
     {
         $c = new Combinator([1, 2, 3, 4, 5], 3);
 
@@ -23,11 +23,11 @@ class CombinatorTest extends TestCase
             $items[] = $item;
         }
 
-        $this->assertEquals(10, count($items));
+        $this->assertCount(10, $items);
         $this->assertCount(3, $items[0]);
     }
 
-    public function testCountCombinationsOf5x5()
+    public function testCountCombinationsOf5x5(): void
     {
         $c = new Combinator([1, 2, 3, 4, 5], 5);
 
@@ -36,7 +36,7 @@ class CombinatorTest extends TestCase
             $items[] = $item;
         }
 
-        $this->assertEquals(1, count($items));
+        $this->assertCount(1, $items);
         $this->assertCount(5, $items[0]);
     }
 }

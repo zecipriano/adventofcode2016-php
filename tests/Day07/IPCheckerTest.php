@@ -7,7 +7,7 @@ use AdventOfCode2016\Day07\IPChecker;
 
 class IPCheckerTest extends TestCase
 {
-    protected $checker;
+    protected IPChecker $checker;
 
     protected function setUp(): void
     {
@@ -17,7 +17,7 @@ class IPCheckerTest extends TestCase
     /**
      * @dataProvider stringsTLS
      */
-    public function testItChecksIfAnAddressSupportsTLS($string, $expected)
+    public function testItChecksIfAnAddressSupportsTLS($string, $expected): void
     {
         $this->assertEquals($expected, $this->checker->checkTLS($string));
     }
@@ -25,12 +25,12 @@ class IPCheckerTest extends TestCase
     /**
      * @dataProvider stringsSSL
      */
-    public function testItChecksIfAnAddressSupportsSSL($string, $expected)
+    public function testItChecksIfAnAddressSupportsSSL($string, $expected): void
     {
         $this->assertEquals($expected, $this->checker->checkSSL($string));
     }
 
-    public static function stringsTLS()
+    public static function stringsTLS(): array
     {
         return [
             ['abba[mnop]qrst', true],
@@ -40,7 +40,7 @@ class IPCheckerTest extends TestCase
         ];
     }
 
-    public static function stringsSSL()
+    public static function stringsSSL(): array
     {
         return [
             ['aba[bab]xyz', true],

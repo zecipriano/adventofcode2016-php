@@ -7,7 +7,7 @@ use AdventOfCode2016\Day04\Decryptor;
 
 class DecryptorTest extends TestCase
 {
-    public function testItDecryptsAString()
+    public function testItDecryptsAString(): void
     {
         $decryptor = new Decryptor();
 

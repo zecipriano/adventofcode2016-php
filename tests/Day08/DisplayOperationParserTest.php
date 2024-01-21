@@ -10,13 +10,13 @@ class DisplayOperationParserTest extends TestCase
     /**
      * @dataProvider commandsProvider
      */
-    public function testItParsesTheOperation(string $string, array $expected)
+    public function testItParsesTheOperation(string $string, array $expected): void
     {
         $parser = new DisplayOperationParser;
         $this->assertEquals($expected, $parser->parse($string));
     }
 
-    public static function commandsProvider()
+    public static function commandsProvider(): array
     {
         return [
             ['rect 3x2', ['rect', 3, 2]],

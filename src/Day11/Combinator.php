@@ -14,16 +14,16 @@ use Iterator;
 class Combinator implements Iterator
 {
     /** @var array */
-    protected $counter = [];
+    protected array $counter = [];
 
     /** @var array */
-    protected $choices;
+    protected array $choices;
 
     /** @var int */
-    protected $size = 0;
+    protected int $size = 0;
 
     /** @var int */
-    protected $position = 0;
+    protected int $position = 0;
 
     /**
      * Set up an instance of Combinator to return sets of `$size` from an array of `$choices`.
@@ -41,7 +41,7 @@ class Combinator implements Iterator
     /**
      * {@inheritdoc}
      */
-    public function key() : int
+    public function key(): int
     {
         return $this->position;
     }
@@ -49,7 +49,7 @@ class Combinator implements Iterator
     /**
      * {@inheritdoc}
      */
-    public function current() : array
+    public function current(): array
     {
         $current = [];
         for ($i = 0; $i < $this->size; $i++) {
@@ -82,7 +82,7 @@ class Combinator implements Iterator
     /**
      * {@inheritdoc}
      */
-    public function valid() : bool
+    public function valid(): bool
     {
         return $this->position >= 0;
     }
@@ -92,10 +92,10 @@ class Combinator implements Iterator
      *
      * @return bool
      */
-    protected function hasNext() : bool
+    protected function hasNext(): bool
     {
         $i = $this->size - 1;
-        while ($i >= 0 && $this->counter[$i] == count($this->choices) - $this->size + $i) {
+        while ($i >= 0 && $this->counter[$i] === count($this->choices) - $this->size + $i) {
             $i--;
         }
 

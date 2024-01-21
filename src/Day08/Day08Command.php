@@ -2,9 +2,8 @@
 
 namespace AdventOfCode2016\Day08;
 
-use AdventOfCode2016\Day08\Display;
-use AdventOfCode2016\Day08\DisplayOperationParser;
 use AdventOfCode2016\Utils\FileReader;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Input\InputArgument;
@@ -13,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Day08Command extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('day08')
             ->setDescription('Day 08: Two-Factor Authentication')
@@ -27,8 +26,8 @@ class Day08Command extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $file =  new FileReader($input->getArgument('input'));
-        } catch (\Exception $e) {
+            $file = new FileReader($input->getArgument('input'));
+        } catch (Exception) {
             $output->writeln("<error>Can\'t read the file.</error>");
             return Command::FAILURE;
         }

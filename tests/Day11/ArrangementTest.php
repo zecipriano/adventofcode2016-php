@@ -12,7 +12,7 @@ class ArrangementTest extends TestCase
     /**
      * @dataProvider configurationsProvider
      */
-    public function testIfConfigurationIsPossible(array $arrangement, bool $expected)
+    public function testIfConfigurationIsPossible(array $arrangement, bool $expected): void
     {
         $arrangementManager = new ArrangementManager();
         $this->assertEquals($expected, $arrangementManager->isPossible($arrangement['objects']));
@@ -24,14 +24,14 @@ class ArrangementTest extends TestCase
     public function testItGeneratesNextConfigurations(
         array $arrangement,
         array $expected
-    ) {
+    ): void {
 
         $arrangementManager = new ArrangementManager();
         $next = $arrangementManager->nextPossibleArrangements($arrangement);
         $this->assertEquals($expected, $next);
     }
 
-    public static function configurationsProvider()
+    public static function configurationsProvider(): array
     {
         return [
             [['elevator' => 0, 'objects' => [1, 0, 2, 0]], true],
@@ -40,7 +40,7 @@ class ArrangementTest extends TestCase
         ];
     }
 
-    public static function nextArrangementsProvider()
+    public static function nextArrangementsProvider(): array
     {
         return [
             [

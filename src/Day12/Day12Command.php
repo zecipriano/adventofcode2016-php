@@ -3,7 +3,7 @@
 namespace AdventOfCode2016\Day12;
 
 use AdventOfCode2016\Utils\FileReader;
-use AdventOfCode2016\Day12\Computer;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Day12Command extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('day12')
             ->setDescription('Day 12: Leonardo\'s Monorail')
@@ -25,8 +25,8 @@ class Day12Command extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $file =  new FileReader($input->getArgument('input'));
-        } catch (\Exception $e) {
+            $file = new FileReader($input->getArgument('input'));
+        } catch (Exception) {
             $output->writeln("<error>Can\'t read the file.</error>");
             return Command::FAILURE;
         }

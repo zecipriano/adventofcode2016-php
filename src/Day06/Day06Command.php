@@ -2,8 +2,8 @@
 
 namespace AdventOfCode2016\Day06;
 
-use AdventOfCode2016\Day06\MessageCorrector;
 use AdventOfCode2016\Utils\FileReader;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Day06Command extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('day06')
             ->setDescription('Day 06: Signals and Noise')
@@ -25,8 +25,8 @@ class Day06Command extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $file =  new FileReader($input->getArgument('input'));
-        } catch (\Exception $e) {
+            $file = new FileReader($input->getArgument('input'));
+        } catch (Exception) {
             $output->writeln("<error>Can\'t read the file.</error>");
             return Command::FAILURE;
         }

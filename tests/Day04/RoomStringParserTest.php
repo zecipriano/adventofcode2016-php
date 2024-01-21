@@ -7,14 +7,14 @@ use AdventOfCode2016\Day04\RoomStringParser;
 
 class RoomStringParserTest extends TestCase
 {
-    protected $stringParser;
+    protected RoomStringParser $stringParser;
 
     protected function setUp(): void
     {
         $this->stringParser = new RoomStringParser();
     }
 
-    public function testItParsesStrings()
+    public function testItParsesStrings(): void
     {
         $roomArray = $this->stringParser->parse("aaaaa-bbb-z-y-x-123[abxyz]");
         $expectedArray = ['name' => 'aaaaa-bbb-z-y-x', 'id' => 123, 'checksum' => 'abxyz'];

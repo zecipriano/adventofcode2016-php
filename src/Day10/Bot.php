@@ -2,17 +2,15 @@
 
 namespace AdventOfCode2016\Day10;
 
-use AdventOfCode2016\Day10\Receiver;
-
 class Bot implements Receiver
 {
-    const LOW = 17;
-    const HIGH = 61;
+    const int LOW = 17;
+    const int HIGH = 61;
 
-    protected $lowReceiver;
-    protected $highReceiver;
-    protected $values;
-    protected $name;
+    protected Receiver $lowReceiver;
+    protected Receiver $highReceiver;
+    protected array $values;
+    protected string $name;
 
     public function __construct(string $name = 'unnamed bot')
     {
@@ -24,13 +22,13 @@ class Bot implements Receiver
      * Set the bot receivers. If the bot already has 2 values triggers the
      * distribution to the receivers.
      *
-     * @param Receiver $lowReceiver  The receiver of the lower value.
+     * @param Receiver $lowReceiver The receiver of the lower value.
      * @param Receiver $highReceiver The receiver of the higer value.
      */
     public function setReceivers(
-        Receiver &$lowReceiver,
-        Receiver &$highReceiver
-    ) : void {
+        Receiver $lowReceiver,
+        Receiver $highReceiver
+    ): void {
         $this->lowReceiver = $lowReceiver;
         $this->highReceiver = $highReceiver;
 
@@ -45,17 +43,17 @@ class Bot implements Receiver
      *
      * @param int $value The value to receive.
      */
-    public function receivesValue(int $value) : void
+    public function receivesValue(int $value): void
     {
         // Only accept value if there is space for it.
         if (count($this->values) < 2) {
-            array_push($this->values, $value);
+            $this->values[] = $value;
         }
 
         // If has two values triggers the distribution.
         if (count($this->values) === 2) {
-            if (min($this->values) == self::LOW &&
-                max($this->values) == self::HIGH) {
+            if (min($this->values) === self::LOW &&
+                max($this->values) === self::HIGH) {
                 echo $this->describe() . "\n";
             }
 
@@ -66,7 +64,7 @@ class Bot implements Receiver
     /**
      * Gives the values to the receivers.
      */
-    public function giveValues() : void
+    public function giveValues(): void
     {
         if ($this->lowReceiver && $this->highReceiver) {
             $this->lowReceiver->receivesValue(min($this->values));
@@ -83,7 +81,7 @@ class Bot implements Receiver
      *
      * @return string A string describing the bot.
      */
-    public function describe() : string
+    public function describe(): string
     {
         $string = "";
         $string .= $this->name . " [" . implode(", ", $this->values) . "]";
@@ -97,7 +95,7 @@ class Bot implements Receiver
      *
      * @return string A string describing the bot.
      */
-    public function describeWithReceivers() : string
+    public function describeWithReceivers(): string
     {
         $string = $this->describe();
 
@@ -117,7 +115,7 @@ class Bot implements Receiver
      *
      * @return Receiver The high receiver.
      */
-    public function getHighReceiver() : Receiver
+    public function getHighReceiver(): Receiver
     {
         return $this->highReceiver;
     }
@@ -127,7 +125,7 @@ class Bot implements Receiver
      *
      * @return Receiver The low receiver.
      */
-    public function getLowReceiver() : Receiver
+    public function getLowReceiver(): Receiver
     {
         return $this->lowReceiver;
     }

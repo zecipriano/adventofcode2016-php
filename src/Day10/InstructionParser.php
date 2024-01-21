@@ -7,11 +7,11 @@ class InstructionParser
     /**
      * Parse a string with an instruction to an associative array.
      *
-     * @param  string $string The string with the instruction.
+     * @param string $string The string with the instruction.
      *
      * @return array          An array with the instruction components.
      */
-    public function parse(string $string) : array
+    public function parse(string $string): array
     {
         $regex = '/value\s([0-9]+).*bot\s([0-9]+)/';
         preg_match($regex, $string, $matches);
@@ -26,9 +26,9 @@ class InstructionParser
         if (count($matches)) {
             return [
                 'type' => 'gives',
-                'originBot' => intval($matches[1]),
-                'low' => [$matches[2], intval($matches[3])],
-                'high' => [$matches[4], intval($matches[5])]
+                'originBot' => (int) $matches[1],
+                'low' => [$matches[2], (int) $matches[3]],
+                'high' => [$matches[4], (int) $matches[5]],
             ];
         }
 

@@ -14,7 +14,7 @@ class FloorLayoutTest extends TestCase
         int $seed,
         array $coordinates,
         bool $expected
-    ) {
+    ): void {
         $layout = new FloorLayout($seed);
 
         //$layout->showLayout([9,6]);
@@ -29,7 +29,7 @@ class FloorLayoutTest extends TestCase
         int $seed,
         array $coordinate,
         array $expected
-    ) {
+    ): void {
         $layout = new FloorLayout($seed);
         $this->assertEquals($expected, $layout->expand($coordinate));
     }
@@ -42,13 +42,13 @@ class FloorLayoutTest extends TestCase
         array $startCoordinate,
         array $endCoordinate,
         int $expected
-    ) {
+    ): void {
         $layout = new FloorLayout($seed);
         $steps = $layout->shortestPath($startCoordinate, $endCoordinate);
         $this->assertEquals($expected, $steps);
     }
 
-    public static function coordinateProvider()
+    public static function coordinateProvider(): array
     {
         $seed = 10;
 
@@ -62,7 +62,7 @@ class FloorLayoutTest extends TestCase
         ];
     }
 
-    public static function pathsProvider()
+    public static function pathsProvider(): array
     {
         $seed = 10;
         $start = [1, 1];
@@ -83,7 +83,7 @@ class FloorLayoutTest extends TestCase
         ];
     }
 
-    public static function expandProvider()
+    public static function expandProvider(): array
     {
         $seed = 10;
 

@@ -7,10 +7,11 @@ class DisplayOperationParser
     /**
      * Parse the operation from the given string.
      *
-     * @param  string $operation The string describing the operation.
-     * @return array             An array with the command and arguments.
+     * @param string $operation The string describing the operation.
+     *
+     * @return array An array with the command and arguments.
      */
-    public function parse(string $operation) : array
+    public function parse(string $operation): array
     {
         // Get command
         $regex = '/rect|rotate row|rotate column/';
@@ -23,6 +24,6 @@ class DisplayOperationParser
         $arg1 = $matches[1][0];
         $arg2 = $matches[3][0];
 
-        return [$command, intval($arg1), intval($arg2)];
+        return [$command, (int) $arg1, (int) $arg2];
     }
 }

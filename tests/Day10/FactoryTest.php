@@ -7,7 +7,7 @@ use AdventOfCode2016\Day10\Factory;
 
 class FactoryTest extends TestCase
 {
-    public function testFactoryDispatchesInstructions()
+    public function testFactoryDispatchesInstructions(): void
     {
         $factory = new Factory();
         $factory->dispatchInstruction('value 5 goes to bot 2');
