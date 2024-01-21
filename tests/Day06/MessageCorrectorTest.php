@@ -1,16 +1,16 @@
 <?php
 
-namespace tests;
+namespace Tests\Day06;
 
 use PHPUnit\Framework\TestCase;
 use AdventOfCode2016\Day06\MessageCorrector;
 
 class MessageCorrectorTest extends TestCase
 {
-    protected $corrector;
-    protected $messagesArray;
+    protected MessageCorrector $corrector;
+    protected array $messagesArray;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->corrector = new MessageCorrector();
         $this->messagesArray = [
@@ -33,13 +33,13 @@ class MessageCorrectorTest extends TestCase
         ];
     }
 
-    public function testItCorrectsTheMessage()
+    public function testItCorrectsTheMessage(): void
     {
         $correctedMessage = $this->corrector->correctMC($this->messagesArray);
         $this->assertEquals('easter', $correctedMessage);
     }
 
-    public function testItCorrectsTheMessageLeastCommon()
+    public function testItCorrectsTheMessageLeastCommon(): void
     {
         $correctedMessage = $this->corrector->correctLC($this->messagesArray);
         $this->assertEquals('advent', $correctedMessage);

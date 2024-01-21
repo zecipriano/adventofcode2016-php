@@ -10,7 +10,7 @@ class FileReader
 
     public function __construct(string $filename)
     {
-        if (!is_readable($filename)) {
+        if (! is_readable($filename)) {
             throw new Exception("File not found or not readable.");
         }
 
@@ -22,7 +22,7 @@ class FileReader
      *
      * @return string The content of the file
      */
-    public function getString() : string
+    public function getString(): string
     {
         $string = trim(file_get_contents($this->filename));
         return $string;
@@ -33,13 +33,13 @@ class FileReader
      *
      * @return array An array of lines.
      */
-    public function getArrayOfLines() : array
+    public function getArrayOfLines(): array
     {
         $array = file(
             $this->filename,
             FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES
         );
-        
+
         return $array;
     }
 }

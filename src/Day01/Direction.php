@@ -6,19 +6,14 @@ use InvalidArgumentException;
 
 class Direction
 {
-    protected $currentDirection;
+    protected string $currentDirection;
 
     public function __construct()
     {
         $this->currentDirection = "N";
     }
 
-    /**
-     * Turn left.
-     *
-     * @return The resulting direction after turning.
-     */
-    public function turnLeft()
+    public function turnLeft(): string
     {
         switch ($this->currentDirection) {
             case "N":
@@ -38,12 +33,7 @@ class Direction
         return $this->currentDirection;
     }
 
-    /**
-     * Turn Right.
-     *
-     * @return The resulting direction after turning.
-     */
-    public function turnRight()
+    public function turnRight(): string
     {
         switch ($this->currentDirection) {
             case "N":
@@ -66,14 +56,10 @@ class Direction
     /**
      * Set the direction to the given $newDirection. Fails if $newDirection is
      * not a valid value.
-     *
-     * @param string $newDirection The direction to set to.
-     *
-     * @return string The resulting direction.
      */
-    public function set(string $newDirection)
+    public function set(string $newDirection): string
     {
-        if (!in_array($newDirection, ["N", "S", "E", "W"])) {
+        if (! in_array($newDirection, ["N", "S", "E", "W"])) {
             throw new InvalidArgumentException("Invalid direction.");
         }
 
@@ -87,7 +73,7 @@ class Direction
      *
      * @return string The current direction
      */
-    public function get() : string
+    public function get(): string
     {
         return $this->currentDirection;
     }

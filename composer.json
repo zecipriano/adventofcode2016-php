@@ -9,15 +9,23 @@
         }
     ],
     "require": {
-        "symfony/console": "^3.2",
-        "kieranajp/combinator": "^0.1.0"
+        "php": "^8.3",
+        "symfony/console": "^7.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^5.6"
+        "phpunit/phpunit": "^10.0",
+        "roave/security-advisories": "dev-latest",
+        "phpstan/phpstan": "^1.10",
+        "squizlabs/php_codesniffer": "*"
     },
     "autoload": {
         "psr-4": {
             "AdventOfCode2016\\": "src/"
+        },
+        "autoload-dev": {
+            "psr-4": {
+                "Tests\\": "tests/"
+            }
         }
     }
 }

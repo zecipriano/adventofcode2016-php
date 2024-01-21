@@ -4,9 +4,9 @@ namespace AdventOfCode2016\Day14;
 
 class KeySearcher
 {
-    const OLD = 1000;
+    const int OLD = 1000;
 
-    public function searchKeys(string $salt, int $nKeys, int $additionalHashes = 0) : int
+    public function searchKeys(string $salt, int $nKeys, int $additionalHashes = 0): int
     {
         $validatedKeys = [];
         $waitingValidation = [];
@@ -18,9 +18,11 @@ class KeySearcher
 
             // Check if it is a possible validation key.
             $valChar = $this->isPossibleKeyValidation($hash);
-            if ($valChar !== null &&
+            if (
+                $valChar !== null &&
                 isset($waitingValidation[$valChar]) &&
-                count($waitingValidation[$valChar]) > 0) {
+                count($waitingValidation[$valChar]) > 0
+            ) {
                 foreach ($waitingValidation[$valChar] as $key) {
                     $validatedKeys[$key[1]] = $key[0];
                 }
@@ -44,8 +46,10 @@ class KeySearcher
             // Check if we reached the end and, if so, return.
             asort($validatedKeys);
 
-            if (count($validatedKeys) > $nKeys &&
-                $index > max(array_slice($validatedKeys, 0, $nKeys)) + self::OLD) {
+            if (
+                count($validatedKeys) > $nKeys &&
+                $index > max(array_slice($validatedKeys, 0, $nKeys)) + self::OLD
+            ) {
                 $array = array_slice($validatedKeys, $nKeys - 1, 1);
                 return current($array);
             }
@@ -57,10 +61,11 @@ class KeySearcher
     /**
      * Check if is a possible key (3 repeating chars).
      *
-     * @param  string      $hash The hash to check
+     * @param string $hash The hash to check
+     *
      * @return string|null       The repeating char or null if not possible key.
      */
-    public function isPossibleKey(string $hash) : ?string
+    public function isPossibleKey(string $hash): ?string
     {
         $regex = '/(.)\1{2}/';
 
@@ -73,11 +78,13 @@ class KeySearcher
 
     /**
      * Check if possible key validation (5 repeating chars).
-     * @param  string      $hash The hash to check.
+     *
+     * @param string $hash The hash to check.
+     *
      * @return string|null       The repeating char or null if not possible
      *                           validation.
      */
-    public function isPossibleKeyValidation(string $hash) : ?string
+    public function isPossibleKeyValidation(string $hash): ?string
     {
         $regex = '/(.)\1{4}/';
 
@@ -88,7 +95,7 @@ class KeySearcher
         return null;
     }
 
-    public function getHash(string $string, int $additionalHashes = 0) : string
+    public function getHash(string $string, int $additionalHashes = 0): string
     {
         $hash = md5($string);
 

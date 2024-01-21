@@ -1,13 +1,13 @@
 <?php
 
-namespace tests;
+namespace Tests\Day08;
 
 use PHPUnit\Framework\TestCase;
 use AdventOfCode2016\Day08\Display;
 
 class DisplayTest extends TestCase
 {
-    public function testItInitializesWithTheGivenSizeAndTurnedOff()
+    public function testItInitializesWithTheGivenSizeAndTurnedOff(): void
     {
         $display = new Display(3, 7);
         $this->assertEquals(21, $display->totalPixels());

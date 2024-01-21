@@ -1,15 +1,15 @@
 <?php
 
-namespace tests\Day09;
+namespace Tests\Day09;
 
 use PHPUnit\Framework\TestCase;
 use AdventOfCode2016\Day09\Decompressor;
 
 class DecompressorTest extends TestCase
 {
-    protected $decompressor;
+    protected Decompressor $decompressor;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->decompressor = new Decompressor();
     }
@@ -17,7 +17,7 @@ class DecompressorTest extends TestCase
     /**
      * @dataProvider stringsLengthProvider
      */
-    public function testItGetsTheLengthOfTheDecompressedString(string $string, int $expected)
+    public function testItGetsTheLengthOfTheDecompressedString(string $string, int $expected): void
     {
         $this->assertEquals($expected, $this->decompressor->decompressedLength($string));
     }
@@ -25,12 +25,12 @@ class DecompressorTest extends TestCase
     /**
      * @dataProvider recursiveStringLength
      */
-    public function testItGetsTheLengthOfTheRecursivelyDecompressedString(string $string, int $expected)
+    public function testItGetsTheLengthOfTheRecursivelyDecompressedString(string $string, int $expected): void
     {
         $this->assertEquals($expected, $this->decompressor->decompressedLength($string, true));
     }
 
-    public function stringsLengthProvider()
+    public static function stringsLengthProvider(): array
     {
         return [
             ['ADVENT', 6],
@@ -42,7 +42,7 @@ class DecompressorTest extends TestCase
         ];
     }
 
-    public function recursiveStringLength()
+    public static function recursiveStringLength(): array
     {
         return [
             ['(3x3)XYZ', 9],

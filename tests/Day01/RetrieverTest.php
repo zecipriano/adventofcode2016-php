@@ -1,20 +1,20 @@
 <?php
 
-namespace tests;
+namespace Tests\Day01;
 
 use PHPUnit\Framework\TestCase;
 use AdventOfCode2016\Day01\Retriever;
 
 class RetrieverTest extends TestCase
 {
-    protected $retriever;
+    protected Retriever $retriever;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->retriever = new Retriever();
     }
 
-    public function testMove1()
+    public function testMove1(): void
     {
         $this->retriever->move("R", 2);
         $this->retriever->move("L", 3);
@@ -24,7 +24,7 @@ class RetrieverTest extends TestCase
         $this->assertEquals(5, $distance);
     }
 
-    public function testMove2()
+    public function testMove2(): void
     {
         $this->retriever->move("R", 2);
         $this->retriever->move("R", 2);
@@ -35,7 +35,7 @@ class RetrieverTest extends TestCase
         $this->assertEquals(2, $distance);
     }
 
-    public function testMove3()
+    public function testMove3(): void
     {
         $this->retriever->move("R", 5);
         $this->retriever->move("L", 5);
@@ -47,7 +47,7 @@ class RetrieverTest extends TestCase
         $this->assertEquals(12, $distance);
     }
 
-    public function testFirstRepeatedPosition()
+    public function testFirstRepeatedPosition(): void
     {
         $this->retriever->move("R", 8);
         $this->retriever->move("R", 4);

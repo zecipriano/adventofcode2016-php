@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Day10;
+namespace Tests\Day10;
 
 use PHPUnit\Framework\TestCase;
 use AdventOfCode2016\Day10\InstructionParser;
@@ -10,7 +10,7 @@ class InstructionsParserTest extends TestCase
     /**
      * @dataProvider instructionsProvider
      */
-    public function testItParsesIntructions(string $string, array $expected)
+    public function testItParsesIntructions(string $string, array $expected): void
     {
         $parser = new InstructionParser();
         $parsed = $parser->parse($string);
@@ -18,7 +18,7 @@ class InstructionsParserTest extends TestCase
         $this->assertEquals($expected, $parsed);
     }
 
-    public function instructionsProvider()
+    public static function instructionsProvider(): array
     {
         return [
             [

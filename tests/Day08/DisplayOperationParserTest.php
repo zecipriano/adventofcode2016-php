@@ -1,6 +1,6 @@
 <?php
 
-namespace tests;
+namespace Tests\Day08;
 
 use PHPUnit\Framework\TestCase;
 use AdventOfCode2016\Day08\DisplayOperationParser;
@@ -10,13 +10,13 @@ class DisplayOperationParserTest extends TestCase
     /**
      * @dataProvider commandsProvider
      */
-    public function testItParsesTheOperation(string $string, array $expected)
+    public function testItParsesTheOperation(string $string, array $expected): void
     {
-        $parser = new DisplayOperationParser;
+        $parser = new DisplayOperationParser();
         $this->assertEquals($expected, $parser->parse($string));
     }
 
-    public function commandsProvider()
+    public static function commandsProvider(): array
     {
         return [
             ['rect 3x2', ['rect', 3, 2]],

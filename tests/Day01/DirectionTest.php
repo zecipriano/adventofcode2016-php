@@ -1,6 +1,6 @@
 <?php
 
-namespace tests;
+namespace Tests\Day01;
 
 use PHPUnit\Framework\TestCase;
 use AdventOfCode2016\Day01\Direction;
@@ -8,14 +8,14 @@ use InvalidArgumentException;
 
 class DirectionTest extends TestCase
 {
-    protected $direction;
+    protected Direction $direction;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->direction = new Direction();
     }
 
-    public function testSetDirection()
+    public function testSetDirection(): void
     {
         $newDirection = $this->direction->set("N");
         $this->assertEquals("N", $newDirection);
@@ -30,14 +30,14 @@ class DirectionTest extends TestCase
         $this->assertEquals("W", $newDirection);
     }
 
-    public function testCantSetInvalidDirection()
+    public function testCantSetInvalidDirection(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $newDirection = $this->direction->set("P");
         $this->assertEquals("N", $newDirection);
     }
 
-    public function testCanTurnLeft()
+    public function testCanTurnLeft(): void
     {
         $newDirection = $this->direction->turnLeft();
         $this->assertEquals("W", $newDirection);
@@ -52,7 +52,7 @@ class DirectionTest extends TestCase
         $this->assertEquals("N", $newDirection);
     }
 
-    public function testCanTurnRight()
+    public function testCanTurnRight(): void
     {
         $newDirection = $this->direction->turnRight();
         $this->assertEquals("E", $newDirection);

@@ -2,10 +2,8 @@
 
 namespace AdventOfCode2016\Day04;
 
-use AdventOfCode2016\Day04\Decryptor;
-use AdventOfCode2016\Day04\Room;
-use AdventOfCode2016\Day04\RoomStringParser;
 use AdventOfCode2016\Utils\FileReader;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -13,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Day04Command extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('day04')
             ->setDescription('Day 04: Security Through Obscurity')
@@ -24,13 +22,13 @@ class Day04Command extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $file =  new FileReader($input->getArgument('input'));
-        } catch (Exception $e) {
+            $file = new FileReader($input->getArgument('input'));
+        } catch (Exception) {
             $output->writeln("<error>Can\'t read the file.</error>");
-            return;
+            return Command::FAILURE;
         }
 
         $lines = $file->getArrayOfLines();
@@ -57,5 +55,7 @@ class Day04Command extends Command
         }
 
         $output->writeln("<info>The sum of the valid room ids is $sum.</info>");
+
+        return Command::SUCCESS;
     }
 }

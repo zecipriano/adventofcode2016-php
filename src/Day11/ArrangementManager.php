@@ -2,23 +2,21 @@
 
 namespace AdventOfCode2016\Day11;
 
-use InvalidArgumentException;
-use Kieranajp\Combinator\Combinator;
-
 class ArrangementManager
 {
-    const MIN_FLOOR = 0;
-    const MAX_FLOOR = 3;
+    const int MIN_FLOOR = 0;
+    const int MAX_FLOOR = 3;
 
     /**
      * Checks if a given object configuration is possible. A configuration is
      * not possible if a disconnected microchip is in the same floor as other
      * generators.
      *
-     * @param  array $objects [description]
+     * @param array $objects [description]
+     *
      * @return bool           [description]
      */
-    public function isPossible(array $objects) : bool
+    public function isPossible(array $objects): bool
     {
         $nObjects = count($objects);
 
@@ -26,11 +24,12 @@ class ArrangementManager
         for ($i = 1; $i < $nObjects; $i += 2) {
             // If the corresponding generator is in a different floor (meaning:
             // the microchip is disconnected).
-            if ($objects[$i] !== $objects[$i - 1]) {
-                // Check if the current floor has generators.
-                if ($this->floorHasGenerators($objects[$i], $objects)) {
-                    return false;
-                }
+            // Check if the current floor has generators.
+            if (
+                ($objects[$i] !== $objects[$i - 1])
+                && $this->floorHasGenerators($objects[$i], $objects)
+            ) {
+                return false;
             }
         }
 
@@ -41,11 +40,10 @@ class ArrangementManager
      * Checks if the given $floor in the given $objects configuration has
      * generators. If not givent $objects defaults to $this->objects.
      *
-     * @param  int    $floor   The floor to check.
-     * @param  ?array $objects The objects configuration.
-     * @return bool            [description]
+     * @param int $floor The floor to check.
+     * @param  array $objects The objects configuration.
      */
-    protected function floorHasGenerators(int $floor, array $objects) : bool
+    protected function floorHasGenerators(int $floor, array $objects): bool
     {
         $nObjects = count($objects);
 
@@ -63,7 +61,7 @@ class ArrangementManager
      *
      * @return array The next possible arrangements.
      */
-    public function nextPossibleArrangements(array $arrangement) : array
+    public function nextPossibleArrangements(array $arrangement): array
     {
         $nextArrangements = [];
         $nextPossibleMinFloor = self::MIN_FLOOR;
@@ -71,7 +69,7 @@ class ArrangementManager
         // Get the objects on the same floor as the elevator.
         $objsCurrentFloor = array_filter(
             $arrangement['objects'],
-            function ($floor) use ($arrangement) {
+            static function ($floor) use ($arrangement) {
                 return $arrangement['elevator'] === $floor;
             }
         );
@@ -99,7 +97,8 @@ class ArrangementManager
             // If the elevator is above the bottom floor and above the first
             // floor that contains a object (there is no point of going
             // below that), then it can go down.
-            if ($arrangement['elevator'] > self::MIN_FLOOR &&
+            if (
+                $arrangement['elevator'] > self::MIN_FLOOR &&
                 $arrangement['elevator'] > $this->minOccupiedFloor($arrangement['objects'])
             ) {
                 $down = $arrangement['objects'];
@@ -115,7 +114,7 @@ class ArrangementManager
                     );
                     $nextArrangements[] = [
                         'elevator' => $arrangement['elevator'] - 1,
-                        'objects' => $down
+                        'objects' => $down,
                     ];
                 }
             }
@@ -135,7 +134,7 @@ class ArrangementManager
                     );
                     $nextArrangements[] = [
                         'elevator' => $arrangement['elevator'] + 1,
-                        'objects' => $up
+                        'objects' => $up,
                     ];
                 }
             }
@@ -158,7 +157,7 @@ class ArrangementManager
      *
      * @return int The lowest floor that contains any object.
      */
-    public function minOccupiedFloor(array $objects) : int
+    public function minOccupiedFloor(array $objects): int
     {
         return min($objects);
     }
@@ -168,7 +167,7 @@ class ArrangementManager
      *
      * @return bool Whether the objects are all on the top floor.
      */
-    public function allObjectsOnTopFloor(array $arrangement) : bool
+    public function allObjectsOnTopFloor(array $arrangement): bool
     {
         foreach ($arrangement['objects'] as $floor) {
             if ($floor !== self::MAX_FLOOR) {

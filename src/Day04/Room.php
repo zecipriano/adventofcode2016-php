@@ -7,21 +7,21 @@ class Room
     /**
      * Calculates the checksum for the given room $name.
      *
-     * @param  string $name The room name
+     * @param string $name The room name
      *
-     * @return string       The checksum
+     * @return string The checksum
      */
-    public function calcChecksum(string $name) : string
+    public function calcChecksum(string $name): string
     {
-        $name = str_split($name);
+        $nameSplitted = str_split($name);
         $charCounts = [];
 
-        foreach ($name as $char) {
+        foreach ($nameSplitted as $char) {
             if ($char === '-') {
                 continue;
             }
 
-            if (!isset($charCounts[$char])) {
+            if (! isset($charCounts[$char])) {
                 $charCounts[$char] = 0;
             }
 
@@ -34,18 +34,14 @@ class Room
     /**
      * Checks is the given $checksum is valid for a given room $name.
      *
-     * @param  string $name     The room name
-     * @param  string $checksum The checksum to test
+     * @param string $name The room name
+     * @param string $checksum The checksum to test
      *
-     * @return bool             Whether the checksum is valid or not
+     * @return bool Whether the checksum is valid or not
      */
-    public function valCheckSum(string $name, string $checksum) : bool
+    public function valCheckSum(string $name, string $checksum): bool
     {
-        if (strcmp($this->calcChecksum($name), $checksum) === 0) {
-            return true;
-        }
-
-        return false;
+        return strcmp($this->calcChecksum($name), $checksum) === 0;
     }
 
     /**
@@ -53,11 +49,11 @@ class Room
      * is a string with the 5 most common chars. First ordered by count then
      * alphabetically.
      *
-     * @param  array  $charCounts An associative array with the char counts
+     * @param array $charCounts An associative array with the char counts
      *
-     * @return string             The string
+     * @return string The string
      */
-    protected function getChecksum(array $charCounts) : string
+    protected function getChecksum(array $charCounts): string
     {
         array_multisort(
             array_values($charCounts),

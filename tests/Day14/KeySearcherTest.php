@@ -1,13 +1,13 @@
 <?php
 
-namespace tests\Day14;
+namespace Tests\Day14;
 
 use AdventOfCode2016\Day14\KeySearcher;
 use PHPUnit\Framework\TestCase;
 
 class KeySearcherTest extends TestCase
 {
-    public function testItSearchesKeys()
+    public function testItSearchesKeys(): void
     {
         $searcher = new KeySearcher();
         $lastKeyIndex = $searcher->searchKeys('abc', 64);
@@ -18,7 +18,7 @@ class KeySearcherTest extends TestCase
     /**
      * @dataProvider possibleKeysProvider
      */
-    public function testItIdentifiesPossibleKeys(string $hash, $expected)
+    public function testItIdentifiesPossibleKeys(string $hash, $expected): void
     {
         $searcher = new KeySearcher();
         $this->assertEquals($expected, $searcher->isPossibleKey($hash));
@@ -30,7 +30,7 @@ class KeySearcherTest extends TestCase
     public function testItIdentifiesPossibleKeyValidations(
         string $hash,
         $expected
-    ) {
+    ): void {
         $searcher = new KeySearcher();
         $this->assertEquals(
             $expected,
@@ -38,7 +38,7 @@ class KeySearcherTest extends TestCase
         );
     }
 
-    public function testItStretchesHashes()
+    public function testItStretchesHashes(): void
     {
         $searcher = new KeySearcher();
         $this->assertEquals(
@@ -47,7 +47,7 @@ class KeySearcherTest extends TestCase
         );
     }
 
-    public function testItSearchesKeysWithHashStretching()
+    public function testItSearchesKeysWithHashStretching(): void
     {
         $searcher = new KeySearcher();
         $lastKeyIndex = $searcher->searchKeys('abc', 64, 2016);
@@ -55,7 +55,7 @@ class KeySearcherTest extends TestCase
         $this->assertEquals(22551, $lastKeyIndex);
     }
 
-    public function possibleKeysProvider()
+    public static function possibleKeysProvider(): array
     {
         return [
             ['0034e0923cc38887a57bd7b1d4f953df', '8'],
@@ -63,7 +63,7 @@ class KeySearcherTest extends TestCase
         ];
     }
 
-    public function possibleValidationProvider()
+    public static function possibleValidationProvider(): array
     {
         return [
             ['3aeeeee1367614f3061d165a5fe3cac3', 'e'],

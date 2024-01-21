@@ -2,8 +2,6 @@
 
 namespace AdventOfCode2016\Day02;
 
-use AdventOfCode2016\Day02\Keypad;
-
 class NormalKeypad extends Keypad
 {
     public function __construct()

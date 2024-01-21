@@ -1,15 +1,15 @@
 <?php
 
-namespace tests\Day15;
+namespace Tests\Day15;
 
 use AdventOfCode2016\Day15\DiscSet;
 use PHPUnit\Framework\TestCase;
 
 class DiscSetTest extends TestCase
 {
-    protected $discSet;
+    protected DiscSet $discSet;
 
-    public function setUp()
+    public function setUp(): void
     {
         $config = [
             1 => ['nPositions' => 5, 'position' => 4],
@@ -19,21 +19,21 @@ class DiscSetTest extends TestCase
         $this->discSet = new DiscSet($config);
     }
 
-    public function testItSetsTheInitialPositions()
+    public function testItSetsTheInitialPositions(): void
     {
         $this->assertEquals(4, $this->discSet->getDiscPosition(1));
         $this->assertEquals(1, $this->discSet->getDiscPosition(2));
         $this->assertEquals(-1, $this->discSet->getDiscPosition(3));
     }
 
-    public function testsItMovesTheDiscs()
+    public function testsItMovesTheDiscs(): void
     {
         $this->discSet->tick();
         $this->assertEquals(0, $this->discSet->getDiscPosition(1));
         $this->assertEquals(0, $this->discSet->getDiscPosition(2));
     }
 
-    public function testTheDiscAlign()
+    public function testTheDiscAlign(): void
     {
         $this->discSet->tick(); // t1
         $this->discSet->tick(); // t2
@@ -46,7 +46,7 @@ class DiscSetTest extends TestCase
         $this->assertEquals(0, $this->discSet->getDiscPosition(2));
     }
 
-    public function testFirstBallToPass()
+    public function testFirstBallToPass(): void
     {
         $config = [
             1 => ['nPositions' => 5, 'position' => 4],

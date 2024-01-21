@@ -2,8 +2,8 @@
 
 namespace AdventOfCode2016\Day01;
 
-use AdventOfCode2016\Day01\Retriever;
 use AdventOfCode2016\Utils\FileReader;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Day01Command extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('day01')
             ->setDescription('Day 01: No Time for a Taxicab')
@@ -22,13 +22,13 @@ class Day01Command extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $file =  new FileReader($input->getArgument('input'));
-        } catch (Exception $e) {
+            $file = new FileReader($input->getArgument('input'));
+        } catch (Exception) {
             $output->writeln("<error>Can\'t read the file.</error>");
-            return;
+            return Command::FAILURE;
         }
 
         $moves = explode(", ", $file->getString());
@@ -36,7 +36,7 @@ class Day01Command extends Command
 
         foreach ($moves as $move) {
             $turnTo = $move[0];
-            $distanceToGo = intval(substr($move, 1));
+            $distanceToGo = (int) substr($move, 1);
 
             $retriever->move($turnTo, $distanceToGo);
         }
@@ -44,10 +44,12 @@ class Day01Command extends Command
         $blocks = $retriever->getDistance();
         $firstTwice = $retriever->getFirstRepeatedDistance();
 
-        $output->writeln("<info>The Easter Bunny HQ is $blocks blocks away".
-                         "</info>");
+        $output->writeln("<info>The Easter Bunny HQ is $blocks blocks away" .
+            "</info>");
 
         $output->writeln("<info>The first location visited twice is " .
-                         "$firstTwice blocks away</info>");
+            "$firstTwice blocks away</info>");
+
+        return Command::SUCCESS;
     }
 }

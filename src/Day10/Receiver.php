@@ -9,12 +9,12 @@ interface Receiver
      *
      * @param int $value The value to receive.
      */
-    public function receivesValue(int $value) : void;
+    public function receivesValue(int $value): void;
 
     /**
      * Return a string describing the object.
      *
      * @return string The description of the object.
      */
-    public function describe() : string;
+    public function describe(): string;
 }

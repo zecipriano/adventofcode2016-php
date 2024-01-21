@@ -4,7 +4,7 @@ namespace AdventOfCode2016\Day13;
 
 class FloorLayout
 {
-    protected $seed;
+    protected int $seed;
     protected $visited;
 
     public function __construct(int $seed)
@@ -15,10 +15,11 @@ class FloorLayout
     /**
      * Check if a given coordenate is an open space.
      *
-     * @param  array $coordinates The coordinate.
+     * @param array $coordinates The coordinate.
+     *
      * @return bool               Whether it's a open space.
      */
-    public function isOpenSpace(array $coordinates) : bool
+    public function isOpenSpace(array $coordinates): bool
     {
         $x = $coordinates[0];
         $y = $coordinates[1];
@@ -27,28 +28,30 @@ class FloorLayout
             return false;
         }
 
-        $decimal = $x*$x + 3*$x + 2*$x*$y + $y + $y*$y + $this->seed;
+        $decimal = $x * $x + 3 * $x + 2 * $x * $y + $y + $y * $y + $this->seed;
         $binary = decbin($decimal);
 
         $bitsArray = str_split($binary);
         $bitsSum = array_sum($bitsArray);
 
-        return $bitsSum % 2 ? false : true;
+        return ! ($bitsSum % 2);
     }
 
     /**
      * Returns the minimum number of steps needed to go from the starting
      * coordinate to the ending coordinate.
      * .
-     * @param  array    $startCoordinate The starting coordinate.
-     * @param  array    $endCoordinate    The ending coordinate.
+     *
+     * @param array $startCoordinate The starting coordinate.
+     * @param array $endCoordinate The ending coordinate.
+     *
      * @return int|null                   The number of steps (or null if not
      *                                    reachable).
      */
     public function shortestPath(
         array $startCoordinate,
         array $endCoordinate
-    ) : ?int {
+    ): ?int {
         $pathLenght = 0;
         $currentCoordinates[] = $startCoordinate;
         $this->visited = null;
@@ -92,14 +95,15 @@ class FloorLayout
     /**
      * Sees how many coordinates can be reached in $steps steps.
      *
-     * @param  array $startCoordinate The starting coordinate.
-     * @param  int   $steps           The number of steps to go.
+     * @param array $startCoordinate The starting coordinate.
+     * @param int $steps The number of steps to go.
+     *
      * @return int                    The amount of reachable coordinates.
      */
     public function reachableCoordinates(
         array $startCoordinate,
         int $steps
-    ) : int {
+    ): int {
         $this->visited = null;
 
         $currentCoordinates[] = $startCoordinate;
@@ -131,10 +135,11 @@ class FloorLayout
      * Get the coordinates that can be reached, but not yet visited, from the
      * given coordinate.
      *
-     * @param  array $coordinate The coordinate.
+     * @param array $coordinate The coordinate.
+     *
      * @return array             An array with the reachable coordinates.
      */
-    public function expand(array $coordinate) : array
+    public function expand(array $coordinate): array
     {
         $expanded = [];
 
@@ -173,10 +178,11 @@ class FloorLayout
      * Checks if a given coordinate is still unvisited. If unvisited marks it
      * as visited before returning.
      *
-     * @param  array $coordinate The coordinate to check.
+     * @param array $coordinate The coordinate to check.
+     *
      * @return bool              Whether it is unvisited.
      */
-    public function unvisited(array $coordinate) : bool
+    public function unvisited(array $coordinate): bool
     {
         $x = $coordinate[0];
         $y = $coordinate[1];

@@ -7,16 +7,16 @@ class Decompressor
     /**
      * Returns the lenght of the decompressed string.
      *
-     * @param  string  $string    The string to decompress.
-     * @param  boolean $recursive Whether to decompress the decompressed
+     * @param string $string The string to decompress.
+     * @param boolean $recursive Whether to decompress the decompressed
      *                            substrings.
      *
-     * @return int                The lenght of the decompressed string.
+     * @return int The lenght of the decompressed string.
      */
     public function decompressedLength(
         string $string,
         bool $recursive = false
-    ) : int {
+    ): int {
         $stringLength = strlen($string);
         $index = 0;
         $decompressedLenght = 0;
