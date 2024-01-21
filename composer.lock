@@ -4,51 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f481d9ec676f715a912596ac48eae2b4",
+    "content-hash": "da7473b0513481de115908ee8ec30408",
     "packages": [
-        {
-            "name": "kieranajp/combinator",
-            "version": "v0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kieranajp/combinator.git",
-                "reference": "9142b5290fcbb3d4e950eed3efbecfbd94e6a0f4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kieranajp/combinator/zipball/9142b5290fcbb3d4e950eed3efbecfbd94e6a0f4",
-                "reference": "9142b5290fcbb3d4e950eed3efbecfbd94e6a0f4",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Kieranajp\\Combinator\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kieran Patel",
-                    "email": "me@kieranajp.co.uk"
-                }
-            ],
-            "description": "Generates combinations of a set.",
-            "support": {
-                "issues": "https://github.com/kieranajp/combinator/issues",
-                "source": "https://github.com/kieranajp/combinator/tree/master"
-            },
-            "time": "2016-06-09T16:10:12+00:00"
-        },
         {
             "name": "psr/container",
             "version": "2.0.2",
@@ -2316,7 +2273,9 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": "^8.3"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
 }

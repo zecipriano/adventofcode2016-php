@@ -2,9 +2,6 @@
 
 namespace AdventOfCode2016\Day11;
 
-use InvalidArgumentException;
-use Kieranajp\Combinator\Combinator;
-
 class ArrangementManager
 {
     const MIN_FLOOR = 0;
