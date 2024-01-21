@@ -22,13 +22,13 @@ class Day03Command extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $file =  new FileReader($input->getArgument('input'));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $output->writeln("<error>Can\'t read the file.</error>");
-            return;
+            return Command::FAILURE;
         }
 
         $lines = $file->getArrayOfLines();
@@ -76,5 +76,7 @@ class Day03Command extends Command
 
         $output->writeln("<info>If defined in columns, there are " .
                          "$validColumnTriangles valid triangles.</info>");
+
+        return Command::SUCCESS;
     }
 }

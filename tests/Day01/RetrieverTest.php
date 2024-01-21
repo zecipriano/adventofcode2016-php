@@ -9,7 +9,7 @@ class RetrieverTest extends TestCase
 {
     protected $retriever;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->retriever = new Retriever();
     }

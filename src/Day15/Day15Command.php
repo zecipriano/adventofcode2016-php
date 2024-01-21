@@ -18,7 +18,7 @@ class Day15Command extends Command
             ->setDescription('Day 15: Timing is Everything');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $start = microtime(true);
         $discConfig = [
@@ -52,5 +52,7 @@ class Day15Command extends Command
         $end = microtime(true);
         $output->writeln("First ball to drop 2: <info>$firstBall</info> (in " .
                          round($end - $start, 2) ."s)");
+
+        return Command::SUCCESS;
     }
 }

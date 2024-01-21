@@ -21,7 +21,7 @@ class Day16Command extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $initialState =  $input->getArgument('input');
 
@@ -36,5 +36,7 @@ class Day16Command extends Command
         $checksum2 = $data->checkSum($initialState, 35651584);
         $end = microtime(true);
         $output->writeln("Checksum 1: <info>$checksum2</info> (in " . round($end - $start, 5) . "s)");
+
+        return Command::SUCCESS;
     }
 }

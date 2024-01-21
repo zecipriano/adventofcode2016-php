@@ -22,13 +22,13 @@ class Day07Command extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $file =  new FileReader($input->getArgument('input'));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $output->writeln("<error>Can\'t read the file.</error>");
-            return;
+            return Command::FAILURE;
         }
 
         $lines = $file->getArrayOfLines();
@@ -49,5 +49,7 @@ class Day07Command extends Command
 
         $output->writeln("<info>$countTLSSupport addresses suport TLS.</info>");
         $output->writeln("<info>$countSSLSupport addresses suport SSL.</info>");
+
+        return Command::SUCCESS;
     }
 }

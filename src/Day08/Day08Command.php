@@ -24,13 +24,13 @@ class Day08Command extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $file =  new FileReader($input->getArgument('input'));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $output->writeln("<error>Can\'t read the file.</error>");
-            return;
+            return Command::FAILURE;
         }
 
         $lines = $file->getArrayOfLines();
@@ -76,5 +76,7 @@ class Day08Command extends Command
         }
 
         $output->writeln(str_repeat("-", count($displayPixels[0])));
+
+        return Command::SUCCESS;
     }
 }

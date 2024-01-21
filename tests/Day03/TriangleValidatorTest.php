@@ -9,7 +9,7 @@ class TriangleValidatorTest extends TestCase
 {
     protected $validator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->validator = new TriangleValidator();
     }

@@ -9,7 +9,7 @@ class IPCheckerTest extends TestCase
 {
     protected $checker;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->checker = new IPChecker();
     }

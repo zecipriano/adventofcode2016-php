@@ -9,7 +9,7 @@ class DecompressorTest extends TestCase
 {
     protected $decompressor;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->decompressor = new Decompressor();
     }

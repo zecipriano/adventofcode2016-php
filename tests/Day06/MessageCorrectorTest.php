@@ -10,7 +10,7 @@ class MessageCorrectorTest extends TestCase
     protected $corrector;
     protected $messagesArray;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->corrector = new MessageCorrector();
         $this->messagesArray = [

@@ -18,7 +18,7 @@ class Day05Command extends Command
             ->addArgument('doorID', InputArgument::REQUIRED, 'The door ID.');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $doorID = $input->getArgument('doorID');
 
@@ -33,5 +33,7 @@ class Day05Command extends Command
             "<info>The improved password is " . $passwords['improvedPassword'] .
             ".</info>"
         );
+
+        return Command::SUCCESS;
     }
 }

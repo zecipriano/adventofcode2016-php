@@ -16,7 +16,7 @@ class Day11Command extends Command
             ->setDescription('Day 11: Radioisotope Thermoelectric Generators');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $initialArrangement = ['elevator' => 0, 'objects' => [0, 0, 1, 2, 1, 2, 1, 2, 1, 2]];
         $output->writeln("Input: " . implode(" ", $initialArrangement['objects']));
@@ -38,5 +38,7 @@ class Day11Command extends Command
         $end = microtime(true);
 
         $output->writeln("<info>Moves 2: $moves (in " . round($end - $start, 2) ."s)</info>");
+
+        return Command::SUCCESS;
     }
 }

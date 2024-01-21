@@ -22,13 +22,13 @@ class Day06Command extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $file =  new FileReader($input->getArgument('input'));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $output->writeln("<error>Can\'t read the file.</error>");
-            return;
+            return Command::FAILURE;
         }
 
         $lines = $file->getArrayOfLines();
@@ -47,5 +47,7 @@ class Day06Command extends Command
             "<info>The corrected message (with the least common char method) " .
             "is: $correctedMessageLC</info>"
         );
+
+        return Command::SUCCESS;
     }
 }

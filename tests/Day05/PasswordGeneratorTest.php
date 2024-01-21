@@ -9,7 +9,7 @@ class PasswordGeneratorTest extends TestCase
 {
     protected $generator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->generator = new PasswordGenerator();
     }

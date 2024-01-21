@@ -9,7 +9,7 @@ class RoomTest extends TestCase
 {
     protected $room;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->room = new Room();
     }

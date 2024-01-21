@@ -10,7 +10,7 @@ class DirectionTest extends TestCase
 {
     protected $direction;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->direction = new Direction();
     }

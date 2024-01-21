@@ -23,13 +23,13 @@ class Day09Command extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $file =  new FileReader($input->getArgument('input'));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $output->writeln("<error>Can\'t read the file.</error>");
-            return;
+            return Command::FAILURE;
         }
 
         $string = $file->getString();
@@ -42,5 +42,7 @@ class Day09Command extends Command
         $improvDecompLength = $decompressor->decompressedLength($string, true);
         $output->writeln("<info>The decompressed length using the improved " .
                          "format is $improvDecompLength.</info>");
+
+        return Command::SUCCESS;
     }
 }

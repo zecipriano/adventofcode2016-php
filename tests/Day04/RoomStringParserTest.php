@@ -9,7 +9,7 @@ class RoomStringParserTest extends TestCase
 {
     protected $stringParser;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->stringParser = new RoomStringParser();
     }

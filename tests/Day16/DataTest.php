@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class DataTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->data = new Data();
     }

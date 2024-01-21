@@ -21,7 +21,7 @@ class Day14Command extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $salt =  $input->getArgument('input');
 
@@ -31,5 +31,7 @@ class Day14Command extends Command
 
         $output->writeln("64th key index: <info>$keyIndex</info>");
         $output->writeln("64th key index (with stretching): <info>$keyIndexStretch</info>");
+
+        return Command::SUCCESS;
     }
 }

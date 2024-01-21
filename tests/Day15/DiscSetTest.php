@@ -9,7 +9,7 @@ class DiscSetTest extends TestCase
 {
     protected $discSet;
 
-    public function setUp()
+    public function setUp(): void
     {
         $config = [
             1 => ['nPositions' => 5, 'position' => 4],

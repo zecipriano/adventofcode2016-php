@@ -23,13 +23,13 @@ class Day10Command extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $file =  new FileReader($input->getArgument('input'));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $output->writeln("<error>Can\'t read the file.</error>");
-            return;
+            return Command::FAILURE;
         }
 
         $lines = $file->getArrayOfLines();
@@ -45,5 +45,7 @@ class Day10Command extends Command
                 $factory->getOutput(2)->getReceivedValues()[0];
 
         $output->writeln("output 0 * output 1 * output 2 = " . $calc);
+
+        return Command::SUCCESS;
     }
 }

@@ -22,13 +22,13 @@ class Day01Command extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $file =  new FileReader($input->getArgument('input'));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $output->writeln("<error>Can\'t read the file.</error>");
-            return;
+            return Command::FAILURE;
         }
 
         $moves = explode(", ", $file->getString());
@@ -49,5 +49,7 @@ class Day01Command extends Command
 
         $output->writeln("<info>The first location visited twice is " .
                          "$firstTwice blocks away</info>");
+
+        return Command::SUCCESS;
     }
 }

@@ -22,13 +22,13 @@ class Day12Command extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $file =  new FileReader($input->getArgument('input'));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $output->writeln("<error>Can\'t read the file.</error>");
-            return;
+            return Command::FAILURE;
         }
 
         $instructionSet = $file->getArrayOfLines();
@@ -41,5 +41,7 @@ class Day12Command extends Command
         $computer = new Computer(['a' => 0, 'b' => 0, 'c' => 1, 'd' => 0]);
         $computer->execute($instructionSet);
         $output->writeln("[a 0, b 0, c 1, d 0] a: " . $computer->getRegisterValue('a'));
+
+        return Command::SUCCESS;
     }
 }

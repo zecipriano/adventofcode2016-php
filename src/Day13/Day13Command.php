@@ -21,7 +21,7 @@ class Day13Command extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $seed =  intval($input->getArgument('input'));
 
@@ -31,5 +31,7 @@ class Day13Command extends Command
 
         $output->writeln("Steps to reach [31, 39]: <info>$steps</info>");
         $output->writeln("Coordinates reachable in 50 steps: <info>$reach</info>");
+
+        return Command::SUCCESS;
     }
 }
