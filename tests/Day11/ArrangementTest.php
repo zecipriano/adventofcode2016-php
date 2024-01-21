@@ -31,7 +31,7 @@ class ArrangementTest extends TestCase
         $this->assertEquals($expected, $next);
     }
 
-    public function configurationsProvider()
+    public static function configurationsProvider()
     {
         return [
             [['elevator' => 0, 'objects' => [1, 0, 2, 0]], true],
@@ -40,7 +40,7 @@ class ArrangementTest extends TestCase
         ];
     }
 
-    public function nextArrangementsProvider()
+    public static function nextArrangementsProvider()
     {
         return [
             [

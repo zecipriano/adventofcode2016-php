@@ -16,7 +16,7 @@ class DisplayOperationParserTest extends TestCase
         $this->assertEquals($expected, $parser->parse($string));
     }
 
-    public function commandsProvider()
+    public static function commandsProvider()
     {
         return [
             ['rect 3x2', ['rect', 3, 2]],

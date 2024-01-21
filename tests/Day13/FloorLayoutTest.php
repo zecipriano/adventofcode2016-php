@@ -48,7 +48,7 @@ class FloorLayoutTest extends TestCase
         $this->assertEquals($expected, $steps);
     }
 
-    public function coordinateProvider()
+    public static function coordinateProvider()
     {
         $seed = 10;
 
@@ -62,7 +62,7 @@ class FloorLayoutTest extends TestCase
         ];
     }
 
-    public function pathsProvider()
+    public static function pathsProvider()
     {
         $seed = 10;
         $start = [1, 1];
@@ -83,7 +83,7 @@ class FloorLayoutTest extends TestCase
         ];
     }
 
-    public function expandProvider()
+    public static function expandProvider()
     {
         $seed = 10;
 

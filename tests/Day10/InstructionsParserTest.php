@@ -18,7 +18,7 @@ class InstructionsParserTest extends TestCase
         $this->assertEquals($expected, $parsed);
     }
 
-    public function instructionsProvider()
+    public static function instructionsProvider()
     {
         return [
             [

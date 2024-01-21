@@ -55,7 +55,7 @@ class KeySearcherTest extends TestCase
         $this->assertEquals(22551, $lastKeyIndex);
     }
 
-    public function possibleKeysProvider()
+    public static function possibleKeysProvider()
     {
         return [
             ['0034e0923cc38887a57bd7b1d4f953df', '8'],
@@ -63,7 +63,7 @@ class KeySearcherTest extends TestCase
         ];
     }
 
-    public function possibleValidationProvider()
+    public static function possibleValidationProvider()
     {
         return [
             ['3aeeeee1367614f3061d165a5fe3cac3', 'e'],

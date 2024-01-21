@@ -7,6 +7,8 @@ use PHPUnit\Framework\TestCase;
 
 class DataTest extends TestCase
 {
+    protected $data;
+
     public function setUp(): void
     {
         $this->data = new Data();
@@ -37,7 +39,7 @@ class DataTest extends TestCase
         $this->assertEquals('01100', $this->data->checkSum('10000', 20));
     }
 
-    public function dataProvider()
+    public static function dataProvider()
     {
         return [
             ['1', '100'],

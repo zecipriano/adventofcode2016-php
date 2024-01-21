@@ -30,7 +30,7 @@ class DecompressorTest extends TestCase
         $this->assertEquals($expected, $this->decompressor->decompressedLength($string, true));
     }
 
-    public function stringsLengthProvider()
+    public static function stringsLengthProvider()
     {
         return [
             ['ADVENT', 6],
@@ -42,7 +42,7 @@ class DecompressorTest extends TestCase
         ];
     }
 
-    public function recursiveStringLength()
+    public static function recursiveStringLength()
     {
         return [
             ['(3x3)XYZ', 9],

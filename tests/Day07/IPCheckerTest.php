@@ -30,7 +30,7 @@ class IPCheckerTest extends TestCase
         $this->assertEquals($expected, $this->checker->checkSSL($string));
     }
 
-    public function stringsTLS()
+    public static function stringsTLS()
     {
         return [
             ['abba[mnop]qrst', true],
@@ -40,7 +40,7 @@ class IPCheckerTest extends TestCase
         ];
     }
 
-    public function stringsSSL()
+    public static function stringsSSL()
     {
         return [
             ['aba[bab]xyz', true],
