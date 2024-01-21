@@ -2,15 +2,11 @@
 
 namespace AdventOfCode2016\Day10;
 
-use AdventOfCode2016\Day10\Bot;
-use AdventOfCode2016\Day10\InstructionParser;
-use AdventOfCode2016\Day10\Receiver;
-
 class Factory
 {
-    protected $bots;
-    protected $outputs;
-    protected $parser;
+    protected array $bots;
+    protected array $outputs;
+    protected InstructionParser $parser;
 
     public function __construct()
     {
@@ -24,7 +20,7 @@ class Factory
      *
      * @param string $instruction The string with the instruction.
      */
-    public function dispatchInstruction(string $instruction) : void
+    public function dispatchInstruction(string $instruction): void
     {
         $parsed = $this->parser->parse($instruction);
 
@@ -43,11 +39,11 @@ class Factory
      * it creates it.
      *
      * @param int $value The value to give.
-     * @param int $bot   The bot ID.
+     * @param int $bot The bot ID.
      */
-    protected function giveValueToBot(int $value, int $bot) : void
+    protected function giveValueToBot(int $value, int $bot): void
     {
-        if (!isset($this->bots[$bot])) {
+        if (! isset($this->bots[$bot])) {
             $this->bots[$bot] = new Bot("bot $bot");
         }
 
@@ -58,13 +54,13 @@ class Factory
      * Sets the given $originBot receivers. If the bot doesn't exist yet,
      * it creates it.
      *
-     * @param int   $originBot The giver bot ID.
-     * @param array $low       An array with the low receiver type and its ID.
-     * @param array $high      An array with the high receiver type and its ID.
+     * @param int $originBot The giver bot ID.
+     * @param array $low An array with the low receiver type and its ID.
+     * @param array $high An array with the high receiver type and its ID.
      */
-    protected function setReceivers(int $originBot, array $low, array $high) : void
+    protected function setReceivers(int $originBot, array $low, array $high): void
     {
-        if (!isset($this->bots[$originBot])) {
+        if (! isset($this->bots[$originBot])) {
             $this->bots[$originBot] = new Bot("bot $originBot");
         }
 
@@ -78,36 +74,35 @@ class Factory
      * Get the receiver object according to its type. If the object does not
      * exist yet, it creates it.
      *
-     * @param  array    $receiver An array with the receiver type and its ID.
-     * @return Receiver           The Receiver object
+     * @param array $receiver An array with the receiver type and its ID.
+     *
+     * @return Receiver The Receiver object
      */
-    protected function getReceiverObject(array $receiver) : Receiver
+    protected function getReceiverObject(array $receiver): Receiver
     {
         if ($receiver[0] === 'bot') {
-            if (!isset($this->bots[$receiver[1]])) {
+            if (! isset($this->bots[$receiver[1]])) {
                 $this->bots[$receiver[1]] = new Bot("bot $receiver[1]");
             }
 
             return $this->bots[$receiver[1]];
         }
 
-        if ($receiver[0] === 'output') {
-            if (!isset($this->outputs[$receiver[1]])) {
-                $this->outputs[$receiver[1]] = new Output("output $receiver[1]");
-            }
-
-            return $this->outputs[$receiver[1]];
+        if (! isset($this->outputs[$receiver[1]])) {
+            $this->outputs[$receiver[1]] = new Output("output $receiver[1]");
         }
+
+        return $this->outputs[$receiver[1]];
     }
 
     /**
      * Get the bot with the given $number.
      *
-     * @param  int $number The bot ID.
+     * @param int $number The bot ID.
      *
      * @return Bot         The bot with the $number ID.
      */
-    public function getBot(int $number) : Bot
+    public function getBot(int $number): Bot
     {
         return $this->bots[$number];
     }
@@ -115,11 +110,11 @@ class Factory
     /**
      * Get the output with the given $number.
      *
-     * @param  int    $number The output ID.
+     * @param int $number The output ID.
      *
      * @return Output         The Output with the $number ID.
      */
-    public function getOutput(int $number) : Output
+    public function getOutput(int $number): Output
     {
         return $this->outputs[$number];
     }

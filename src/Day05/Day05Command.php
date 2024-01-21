@@ -2,7 +2,6 @@
 
 namespace AdventOfCode2016\Day05;
 
-use AdventOfCode2016\Day05\PasswordGenerator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Day05Command extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('day05')
@@ -18,7 +17,7 @@ class Day05Command extends Command
             ->addArgument('doorID', InputArgument::REQUIRED, 'The door ID.');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $doorID = $input->getArgument('doorID');
 
@@ -33,5 +32,7 @@ class Day05Command extends Command
             "<info>The improved password is " . $passwords['improvedPassword'] .
             ".</info>"
         );
+
+        return Command::SUCCESS;
     }
 }

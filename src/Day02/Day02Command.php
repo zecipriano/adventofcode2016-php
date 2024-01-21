@@ -2,9 +2,8 @@
 
 namespace AdventOfCode2016\Day02;
 
-use AdventOfCode2016\Day02\AlternativeKeypad;
-use AdventOfCode2016\Day02\NormalKeypad;
 use AdventOfCode2016\Utils\FileReader;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Day02Command extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('day02')
             ->setDescription('Day 02: Bathroom Security')
@@ -23,13 +22,13 @@ class Day02Command extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $file =  new FileReader($input->getArgument('input'));
-        } catch (Exception $e) {
+            $file = new FileReader($input->getArgument('input'));
+        } catch (Exception) {
             $output->writeln("<error>Can\'t read the file.</error>");
-            return;
+            return Command::FAILURE;
         }
 
         $lines = $file->getArrayOfLines();
@@ -52,9 +51,11 @@ class Day02Command extends Command
         }
 
         $output->writeln("<info>The normal bathroom code is $normalCode." .
-                         "</info>");
+            "</info>");
 
         $output->writeln("<info>The alternative bathroom code is $altCode." .
-                         "</info>");
+            "</info>");
+
+        return Command::SUCCESS;
     }
 }

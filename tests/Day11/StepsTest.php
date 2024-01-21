@@ -1,14 +1,13 @@
 <?php
 
-namespace tests\Day11;
+namespace Tests\Day11;
 
 use PHPUnit\Framework\TestCase;
-
 use AdventOfCode2016\Day11\Steps;
 
 class StepsTest extends TestCase
 {
-    public function testItCalculatesTheNeededMovesCorrectly()
+    public function testItCalculatesTheNeededMovesCorrectly(): void
     {
         $steps = new Steps();
         $moves = $steps->move(['elevator' => 0, 'objects' => [1, 0, 2, 0]]);

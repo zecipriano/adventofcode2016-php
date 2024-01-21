@@ -2,7 +2,6 @@
 
 namespace AdventOfCode2016\Day16;
 
-use AdventOfCode2016\Day16\Data;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Day16Command extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('day16')
             ->setDescription('Day 16: Dragon Checksum')
@@ -21,9 +20,9 @@ class Day16Command extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $initialState =  $input->getArgument('input');
+        $initialState = $input->getArgument('input');
 
         $data = new Data();
 
@@ -36,5 +35,7 @@ class Day16Command extends Command
         $checksum2 = $data->checkSum($initialState, 35651584);
         $end = microtime(true);
         $output->writeln("Checksum 1: <info>$checksum2</info> (in " . round($end - $start, 5) . "s)");
+
+        return Command::SUCCESS;
     }
 }

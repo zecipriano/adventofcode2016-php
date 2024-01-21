@@ -2,7 +2,6 @@
 
 namespace AdventOfCode2016\Day14;
 
-use AdventOfCode2016\Day14\KeySearcher;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Day14Command extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('day14')
             ->setDescription('Day 14: One-Time Pad')
@@ -21,9 +20,9 @@ class Day14Command extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $salt =  $input->getArgument('input');
+        $salt = $input->getArgument('input');
 
         $searcher = new KeySearcher();
         $keyIndex = $searcher->searchKeys($salt, 64);
@@ -31,5 +30,7 @@ class Day14Command extends Command
 
         $output->writeln("64th key index: <info>$keyIndex</info>");
         $output->writeln("64th key index (with stretching): <info>$keyIndexStretch</info>");
+
+        return Command::SUCCESS;
     }
 }

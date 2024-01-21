@@ -1,20 +1,20 @@
 <?php
 
-namespace tests;
+namespace Tests\Day05;
 
 use PHPUnit\Framework\TestCase;
 use AdventOfCode2016\Day05\PasswordGenerator;
 
 class PasswordGeneratorTest extends TestCase
 {
-    protected $generator;
+    protected PasswordGenerator $generator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->generator = new PasswordGenerator();
     }
 
-    public function testItGeneratesThePassword()
+    public function testItGeneratesThePassword(): void
     {
         $passwords = $this->generator->generate('abc');
         $this->assertEquals('18f47a30', $passwords['password']);

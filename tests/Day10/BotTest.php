@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Day10;
+namespace Tests\Day10;
 
 use PHPUnit\Framework\TestCase;
 use AdventOfCode2016\Day10\Bot;
@@ -8,7 +8,7 @@ use AdventOfCode2016\Day10\Output;
 
 class BotTest extends TestCase
 {
-    public function testBots()
+    public function testBots(): void
     {
         $bot0 = new Bot();
         $bot1 = new Bot();

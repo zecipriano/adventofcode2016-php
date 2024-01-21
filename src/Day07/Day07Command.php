@@ -2,8 +2,8 @@
 
 namespace AdventOfCode2016\Day07;
 
-use AdventOfCode2016\Day07\IPChecker;
 use AdventOfCode2016\Utils\FileReader;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Day07Command extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('day07')
             ->setDescription('Day 07: Internet Protocol Version 7')
@@ -22,13 +22,13 @@ class Day07Command extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $file =  new FileReader($input->getArgument('input'));
-        } catch (Exception $e) {
+            $file = new FileReader($input->getArgument('input'));
+        } catch (Exception) {
             $output->writeln("<error>Can\'t read the file.</error>");
-            return;
+            return Command::FAILURE;
         }
 
         $lines = $file->getArrayOfLines();
@@ -49,5 +49,7 @@ class Day07Command extends Command
 
         $output->writeln("<info>$countTLSSupport addresses suport TLS.</info>");
         $output->writeln("<info>$countSSLSupport addresses suport SSL.</info>");
+
+        return Command::SUCCESS;
     }
 }

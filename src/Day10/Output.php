@@ -2,12 +2,10 @@
 
 namespace AdventOfCode2016\Day10;
 
-use AdventOfCode2016\Day10\Receiver;
-
 class Output implements Receiver
 {
-    protected $receivedValues;
-    public $name;
+    public string $name;
+    protected array $receivedValues;
 
     public function __construct(string $name = 'unnamed output')
     {
@@ -20,9 +18,9 @@ class Output implements Receiver
      *
      * @param int $value The value received.
      */
-    public function receivesValue(int $value) : void
+    public function receivesValue(int $value): void
     {
-        array_push($this->receivedValues, $value);
+        $this->receivedValues[] = $value;
     }
 
     /**
@@ -30,7 +28,7 @@ class Output implements Receiver
      *
      * @return array The array of received values.
      */
-    public function getReceivedValues() : array
+    public function getReceivedValues(): array
     {
         return $this->receivedValues;
     }
@@ -40,7 +38,7 @@ class Output implements Receiver
      *
      * @return string A string describing the output.
      */
-    public function describe() : string
+    public function describe(): string
     {
         return $this->name . " [" . implode(", ", $this->receivedValues) . "]";
     }
