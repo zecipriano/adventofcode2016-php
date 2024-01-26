@@ -4,7 +4,7 @@ namespace AdventOfCode2016\Day14;
 
 class KeySearcher
 {
-    const int OLD = 1000;
+    protected const int OLD = 1000;
 
     public function searchKeys(string $salt, int $nKeys, int $additionalHashes = 0): int
     {

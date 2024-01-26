@@ -4,23 +4,23 @@ namespace AdventOfCode2016\Day05;
 
 class PasswordGenerator
 {
-    const int PASSWORD_SIZE = 8;
-    const int HASH_ZEROS = 5;
-    const string STRING_ZEROS = "00000";
+    protected const int PASSWORD_SIZE = 8;
+    protected const int HASH_ZEROS = 5;
+    protected const string STRING_ZEROS = "00000";
 
     /**
      * Generate a password and a improved password for the given $doorID.
      *
      * @param string $doorID The door ID to generate a password for
      *
-     * @return array          The generated passwords
+     * @return array The generated passwords
      */
     public function generate(string $doorID): array
     {
         $password = "";
         $improvedPassword = [];
         $index = 0;
-        $passNotDone = strlen($password) < self::PASSWORD_SIZE;
+        $passNotDone = true;
         $impPassNotDone = true;
 
         while ($passNotDone || $impPassNotDone) {

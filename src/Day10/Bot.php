@@ -4,11 +4,11 @@ namespace AdventOfCode2016\Day10;
 
 class Bot implements Receiver
 {
-    const int LOW = 17;
-    const int HIGH = 61;
+    protected const int LOW = 17;
+    protected const int HIGH = 61;
 
-    protected Receiver $lowReceiver;
-    protected Receiver $highReceiver;
+    protected ?Receiver $lowReceiver;
+    protected ?Receiver $highReceiver;
     protected array $values;
     protected string $name;
 
