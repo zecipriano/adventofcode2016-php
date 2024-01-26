@@ -55,11 +55,14 @@ class Room
      */
     protected function getChecksum(array $charCounts): string
     {
+        $values = array_values($charCounts);
+        $keys = array_keys($charCounts);
+
         array_multisort(
-            array_values($charCounts),
+            $values,
             SORT_DESC,
             SORT_NUMERIC,
-            array_keys($charCounts),
+            $keys,
             SORT_ASC,
             SORT_STRING,
             $charCounts

@@ -4,8 +4,8 @@ namespace AdventOfCode2016\Day11;
 
 class ArrangementManager
 {
-    const int MIN_FLOOR = 0;
-    const int MAX_FLOOR = 3;
+    protected const int MIN_FLOOR = 0;
+    protected const int MAX_FLOOR = 3;
 
     /**
      * Checks if a given object configuration is possible. A configuration is
