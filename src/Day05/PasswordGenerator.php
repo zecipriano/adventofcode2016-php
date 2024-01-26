@@ -13,14 +13,14 @@ class PasswordGenerator
      *
      * @param string $doorID The door ID to generate a password for
      *
-     * @return array          The generated passwords
+     * @return array The generated passwords
      */
     public function generate(string $doorID): array
     {
         $password = "";
         $improvedPassword = [];
         $index = 0;
-        $passNotDone = strlen($password) < self::PASSWORD_SIZE;
+        $passNotDone = true;
         $impPassNotDone = true;
 
         while ($passNotDone || $impPassNotDone) {
