@@ -4,9 +4,9 @@ namespace AdventOfCode2016\Day04;
 
 class Decryptor
 {
-    const int N_LETTERS = 26;
-    const int ASCII_LOWER_A = 97;
-    const int ASCII_LOWER_Z = 122;
+    protected const int N_LETTERS = 26;
+    protected const int ASCII_LOWER_A = 97;
+    protected const int ASCII_LOWER_Z = 122;
 
     /**
      * Decrypt the given $name with the given $id

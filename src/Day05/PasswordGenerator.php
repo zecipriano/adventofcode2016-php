@@ -4,9 +4,9 @@ namespace AdventOfCode2016\Day05;
 
 class PasswordGenerator
 {
-    const int PASSWORD_SIZE = 8;
-    const int HASH_ZEROS = 5;
-    const string STRING_ZEROS = "00000";
+    protected const int PASSWORD_SIZE = 8;
+    protected const int HASH_ZEROS = 5;
+    protected const string STRING_ZEROS = "00000";
 
     /**
      * Generate a password and a improved password for the given $doorID.
